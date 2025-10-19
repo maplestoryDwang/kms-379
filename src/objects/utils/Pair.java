@@ -1,0 +1,65 @@
+package objects.utils;
+
+import java.io.Serializable;
+
+public class Pair<E, F> implements Serializable {
+   private static final long serialVersionUID = 9179541993413738569L;
+   public E left;
+   public F right;
+
+   public Pair(E left, F right) {
+      this.left = left;
+      this.right = right;
+   }
+
+   public E getLeft() {
+      return this.left;
+   }
+
+   public F getRight() {
+      return this.right;
+   }
+
+   @Override
+   public String toString() {
+      return this.left.toString() + ":" + this.right.toString();
+   }
+
+   @Override
+   public int hashCode() {
+      int prime = 31;
+      int result = 1;
+      result = 31 * result + (this.left == null ? 0 : this.left.hashCode());
+      return 31 * result + (this.right == null ? 0 : this.right.hashCode());
+   }
+
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj) {
+         return true;
+      } else if (obj == null) {
+         return false;
+      } else if (this.getClass() != obj.getClass()) {
+         return false;
+      } else {
+         Pair other = (Pair)obj;
+         if (this.left == null) {
+            if (other.left != null) {
+               return false;
+            }
+         } else if (!this.left.equals(other.left)) {
+            return false;
+         }
+
+         if (this.right == null) {
+            if (other.right != null) {
+               return false;
+            }
+         } else if (!this.right.equals(other.right)) {
+            return false;
+         }
+
+         return true;
+      }
+   }
+}

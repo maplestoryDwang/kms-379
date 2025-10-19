@@ -1,0 +1,37 @@
+package objects.users.enchant;
+
+public enum ItemStateFlag {
+   MIRACULOUS_ENHANCEMENT(1),
+   UNK(2),
+   UNK1(4),
+   REFUNDABLE_GACHAPON_ITEM(8),
+   REFUNDABLE_EVENT_GACHAPON_ITEM(16),
+   RED_LABEL_ITEM(32),
+   BLACK_LABEL_ITEM(64),
+   INNOCENT_RUC_ITEM(128),
+   AMAZING_HYPER_UPGRADE_CHECKED(256),
+   VESTIGE_POSSIBLE_TRADING(512),
+   VESTIGE_BOUND(1024),
+   VESTIGE_APPLIED_ACCOUNT_SHARE(2048),
+   UNK_(4096),
+   EXPIRE_ON_LOGOUT(8192),
+   UNSTABLITY(16384),
+   EXPIRE_ON_LOGOUT_PREMIUM(32768),
+   UNK2(65536),
+   LOCK(131072),
+   UNK3(262144),
+   SORT_LOCK(524288),
+   CODY_PRESET_ITEM(1048576),
+   CODY_PRESET1_UNEQUIP(2097152),
+   CODY_PRESET2_UNEQUIP(4194304);
+
+   private int value;
+
+   private ItemStateFlag(int value) {
+      this.value = value;
+   }
+
+   public int getValue() {
+      return this.value;
+   }
+}

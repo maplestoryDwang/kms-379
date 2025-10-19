@@ -1,0 +1,91 @@
+package objects.users.achievement.caching.mission.submission.checkvalue.check;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Map.Entry;
+import objects.item.Item;
+import objects.users.MapleCharacter;
+import objects.users.achievement.Achievement;
+import objects.users.achievement.AchievementFactory;
+import objects.users.achievement.AchievementSubMissionType;
+import objects.users.achievement.caching.AchievementData;
+import objects.users.achievement.caching.mission.Mission;
+import objects.users.achievement.caching.mission.MissionEntry;
+import objects.users.achievement.caching.mission.submission.SubMission;
+import objects.users.achievement.caching.mission.submission.checkvalue.CheckValue;
+import objects.users.achievement.caching.mission.submission.checkvalue.IncHP;
+import objects.users.achievement.caching.mission.submission.checkvalue.ItemCheck;
+import objects.users.achievement.caching.mission.submission.checkvalue.PetCheck;
+import objects.users.achievement.caching.mission.submission.score.Score;
+
+public class ItemUseCheck extends AchievementMissionCheck {
+   int itemID;
+   int incHP;
+   int petSatiety;
+
+   public ItemUseCheck(int... value) {
+      this.itemID = value[0];
+      this.incHP = value[1];
+      this.petSatiety = value[2];
+   }
+
+   @Override
+   public boolean check(CheckValue checkValue) {
+      boolean item = true;
+      ItemCheck itemCheck = checkValue.getItem();
+      if (itemCheck != null) {
+         Item check = new Item(this.itemID, (byte)0, (short)1);
+         item = itemCheck.check(Arrays.asList(check));
+      }
+
+      boolean incHp = true;
+      IncHP incHP = checkValue.getIncHP();
+      if (incHP != null) {
+         incHp = incHP.check(this.incHP);
+      }
+
+      boolean pet = true;
+      PetCheck petCheck = checkValue.getPetCheck();
+      if (petCheck != null) {
+         pet = petCheck.check(this.petSatiety);
+      }
+
+      return item && incHp && pet;
+   }
+
+   @Override
+   public void checkMission(MapleCharacter player, AchievementSubMissionType type, long delta) {
+      int[] ids = new int[]{31, 32};
+
+      for (int id : ids) {
+         AchievementData entry = AchievementFactory.achievementDatas.get(id);
+         int achievementID = id;
+         Mission mission = entry.getMission();
+         if (mission != null) {
+            Map<Integer, MissionEntry> missions = mission.getMissions();
+            if (missions != null && !missions.isEmpty()) {
+               for (Entry<Integer, MissionEntry> entryMap : missions.entrySet()) {
+                  MissionEntry missionEntry = entryMap.getValue();
+                  if (missionEntry != null) {
+                     int subMissionID = entryMap.getKey();
+                     SubMission subMission = missionEntry.getSubMission();
+                     if (subMission != null && subMission.getSubMissionType() == type) {
+                        CheckValue checkValue = subMission.getCheckValue();
+                        Score score = subMission.getScore();
+                        if (checkValue != null && score != null && this.check(checkValue)) {
+                           Achievement achievement = player.getAchievement();
+                           this.updateList.add(AchievementFactory.checkMission(delta, player, achievement, type, mission, score, achievementID, subMissionID));
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+
+      this.updateList.removeIf(Objects::isNull);
+      player.getAchievement().updateAchievement(player, this.updateList);
+      this.updateList.clear();
+   }
+}
