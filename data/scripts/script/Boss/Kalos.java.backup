@@ -1,0 +1,167 @@
+package script.Boss;
+
+import constants.QuestExConstants;
+import database.DBConfig;
+import network.models.CField;
+import objects.fields.child.karrotte.Field_BossKalos;
+import objects.fields.fieldset.childs.*;
+import objects.fields.gameobject.lifes.MapleLifeFactory;
+import scripting.ScriptMessageFlag;
+import scripting.newscripting.ScriptEngineNPC;
+
+public class Kalos extends ScriptEngineNPC {
+	public void kalos_enterGate() {
+		/*
+		if (!(getPlayer().getClient().isGm() || getPlayer().isGM())) {
+			target.say("지금은 입장이 불가능합니다.");
+			return;
+		}
+		*/
+		String Message = "[3인입장가능] 감시자 칼로스와의 전투를 위해 이동할까? (#r레벨 500이상#k 입장 가능)\r\n\r\n";
+		Message += "#L1#<보스: 감시자 칼로스(#b카오스#k> 입장을 신청한다. #g[" + getPlayer().getOneInfoQuestInteger(1234569, "kalos_clear") + "/" + (getPlayer().getBossTier() + 1) + "]#k#l\r\n";
+		Message += "#L5#<보스: 감시자 칼로스(#b카오스 연습 모드#k)> 입장을 신청한다.#l#k\r\n";
+		/*  380 이후에 사용할 입장스크립트
+		Message += "#L0#<보스: 감시자 칼로스(#b이지#k)> 입장을 신청한다. #g[" + getPlayer().getOneInfoQuestInteger(1234570, "kalos_clear") + "/" + (getPlayer().getBossTier() + 1) + "]#k#l\r\n";
+        Message += "#L1#<보스: 감시자 칼로스(#b노멀#k)> 입장을 신청한다. #g[" + getPlayer().getOneInfoQuestInteger(1234569, "kalos_clear") + "/" + (getPlayer().getBossTier() + 1) + "]#k#l\r\n";
+        Message += "#L2#<보스: 감시자 칼로스(#b카오스#k> 입장을 신청한다. #g[" + getPlayer().getOneInfoQuestInteger(1234569, "kalos_clear") + "/" + (getPlayer().getBossTier() + 1) + "]#k#l\r\n";
+        Message += "#L3#<보스: 감시자 칼로스(#b익스트림#k> 입장을 신청한다. #g[" + getPlayer().getOneInfoQuestInteger(1234569, "kalos_clear") + "/" + (getPlayer().getBossTier() + 1) + "]#k#l\r\n";
+        Message += "#L4#<보스: 감시자 칼로스(#b이지 연습 모드#k)> 입장을 신청한다.#l#k\r\n";
+        Message += "#L5#<보스: 감시자 칼로스(#b노멀 연습 모드#k)> 입장을 신청한다.#l#k\r\n";
+        Message += "#L6#<보스: 감시자 칼로스(#b카오스 연습 모드#k)> 입장을 신청한다.#l#k\r\n";
+        Message += "#L7#<보스: 감시자 칼로스(#b익스트림 연습 모드#k)> 입장을 신청한다.#l#k\r\n";
+        */
+        //Message += "#L8#<보스: 감시자 칼로스(#r헬 모드#k)> 입장을 신청한다.#l#k\r\n";
+        Message += "#L9#이동하지 않는다.#l";
+        int Menu = target.askMenu(Message, ScriptMessageFlag.BigScenario);
+        if (Menu < 0 || Menu >= 9) {
+        	return;
+        }
+        if (target.getParty() == null) {
+        	int partyReq = target.askYesNo("파티가 있어야 입장할 수 있습니다. 파티를 생성하시겠습니까?");
+        	if (partyReq != 1) {
+        		return;
+        	}
+        	else {
+        		getPlayer().createParty();
+        	}
+        }
+        if (target.getParty().getLeader().getId() != target.getId()) {
+            self.sayOk("파티장을 통해 진행해 주십시오.", ScriptMessageFlag.NpcReplacedByNpc);
+            return;
+        }
+        if (!target.getParty().isPartySameMap()) {
+            self.sayOk("파티원이 모두 같은맵에 있어야 합니다.", ScriptMessageFlag.NpcReplacedByNpc);
+            return;
+        }
+        if (target.getParty().getPartyMemberList().size() > 3) {
+            self.sayOk("최대 3인까지 같은 파티로 입장 가능합니다.", ScriptMessageFlag.NpcReplacedByNpc);
+            return;
+        }
+        
+        //현재는 카오스임. 380때 카오스 -> 노말로 바뀜
+        if (Menu == 1 || Menu == 5) {
+        	NormalKalosEnter fieldSet = (NormalKalosEnter) fieldSet("NormalKalosEnter");
+            int enter = fieldSet.enter(target.getId(), Menu == 5, 7);
+            if (enter == 6) {
+                self.sayOk("이용 가능한 인스턴스가 없습니다. 다른 채널을 이용해주세요.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                return;
+            }
+            if (enter == -5) {
+                self.sayOk("보스 티어가 부족한 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                return;
+            }
+            if (enter == -3) {
+            	self.sayOk("최근 일주일 이내 칼로스를 쓰러뜨린 파티원이 있습니다. 칼로스는 일주일에 1회만 클리어 가능합니다\r\n#r<클리어 기록은 매주 목요일에 일괄 초기화됩니다.>", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+            	/*
+                if (DBConfig.isGanglim) {
+                    self.sayOk("금일 입장 횟수를 모두 소모한 파티원이 있습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                } else {
+                    self.sayOk("최근 일주일 이내 칼로스를 쓰러뜨린 파티원이 있습니다. 칼로스는 일주일에 1회만 클리어 가능합니다\r\n#r<클리어 기록은 매주 목요일에 일괄 초기화됩니다.>", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                }
+                */
+                return;
+            }
+            if ((enter == -1 || enter == 4)) {
+                self.sayOk("입장 제한횟수가 부족하거나 레벨 제한이 맞지 않는 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                return;
+            }
+            if (enter == -2) {
+                self.sayOk("입장 제한시간이 남은 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                return;
+            }
+            //break;
+        }
+	}
+
+    
+    public void kalos_direction1() {
+        setIngameDirectionMode(false, false, false);
+        blind(1, 255, 0, 0, 0, 0, 0);
+        spineEffect("Effect/Direction20.img/bossKalos/1phase_spine/skeleton", "animation", "intro", 0, 0, 1, 0);
+        effectSound("Sound/SoundEff.img/kalos/1phase");
+        getPlayer().setRegisterTransferField(getPlayer().getMapId() + 20);
+        getPlayer().setRegisterTransferFieldTime(System.currentTimeMillis() + 7000);
+        delay(7000);
+        environmentChange(31, "intro", 100);
+        getOnOffFade(100, "BlackOPut", 0);
+    }
+    
+    public void kalos_direction1_easy() {
+    	kalos_direction1();
+    }
+    
+    public void kalos_direction1_chaos() {
+    	kalos_direction1();
+    }
+    
+    public void kalos_direction1_ex() {
+    	kalos_direction1();
+    }
+    
+    public void kalos_direction2() {
+        setIngameDirectionMode(false, false, false);
+        blind(1, 255, 0, 0, 0, 0, 0);
+        spineEffect("Effect/Direction20.img/bossKalos/2phase_spine/skeleton", "animation", "intro", 0, 0, 1, 0);
+        effectSound("Sound/SoundEff.img/kalos/2phase");
+        getPlayer().setRegisterTransferField(getPlayer().getMapId() + 20);
+        getPlayer().setRegisterTransferFieldTime(System.currentTimeMillis() + 7000);
+        delay(7000);
+        environmentChange(31, "intro", 100);
+        getOnOffFade(100, "BlackOPut", 0);
+    }
+    
+    public void kalos_direction2_easy() {
+    	kalos_direction2();
+    }
+    
+    public void kalos_direction2_chaos() {
+    	kalos_direction2();
+    }
+    
+    public void kalos_direction2_ex() {
+    	kalos_direction2();
+    }
+    
+    
+    /*
+    public void ptKalosOut() {
+    	if (getPlayer().getMap() instanceof Field_BossKalos) {
+    		Field_BossKalos kalosmap = (Field_BossKalos) getPlayer().getMap();
+    		if (kalosmap.findBoss() != null) {
+    			getPlayer().dropMessage(5, "전투가 진행중에는 포탈을 클릭하여 퇴장 가능합니다.");
+    			return;
+    		}
+    	}
+    	kalosOut();
+    }
+    
+    public void kalosOut() {
+    	initNPC(MapleLifeFactory.getNPC(9091028));
+    	if (1 == target.askYesNo("전투를 중단하고 퇴장하시겠습니까?")) {
+    		getPlayer().warp(410005005);    		
+    	}
+    }
+    */
+
+
+}

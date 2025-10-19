@@ -1,0 +1,58 @@
+9309083 = {
+	0 = {
+		ItemID = 4031213
+		Chance = 800
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	1 = {
+		ItemID = 4000979
+		Chance = 80
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	2 = {
+		ItemID = 4000101
+		Chance = 80
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	3 = {
+		ItemID = 4034809
+		Chance = 80
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	4 = {
+		ItemID = 4000220
+		Chance = 80
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	5 = {
+		ItemID = 4000439
+		Chance = 80
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	6 = {
+		ItemID = 4000896
+		Chance = 80
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

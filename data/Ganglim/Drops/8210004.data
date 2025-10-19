@@ -1,0 +1,10 @@
+8210004 = {
+	0 = {
+		ItemID = 4010001
+		Chance = 80
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

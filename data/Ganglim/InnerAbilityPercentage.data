@@ -1,0 +1,24 @@
+# 어빌리티 재설정 시 확률을 정하기 위한 Table 입니다. (나누기 1000)
+
+gradeUpRare2Epic = 5000
+gradeUpEpic2Unique = 2000
+gradeUpUnique2Legendary = 1000
+
+UniqueSecondAbilityEpic = 10000
+UniqueThirdAbilityEpic = 10000
+
+legendarySecondAbilityUnique = 5000
+legendarySecondAbilityEpic = 15000
+legendaryThirdAbilityUnique = 5000
+legendaryThirdAbilityEpic = 15000
+
+# 미라클 서큘레이터 확률
+gradeUpEpic2UniqueCirculator = 30000
+gradeUpUnique2LegendaryCirculator = 10000
+
+UniqueSecondAbilityEpicCirculator = 10000
+UniqueThirdAbilityEpicCirculator = 10000
+legendarySecondAbilityUniqueCirculator = 5000
+legendarySecondAbilityEpicCirculator = 15000
+legendaryThirdAbilityUniqueCirculator = 5000
+legendaryThirdAbilityEpicCirculator = 15000

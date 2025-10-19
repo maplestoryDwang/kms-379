@@ -1,0 +1,53 @@
+1052206 = {
+    0 = {
+        ItemID = 2437189
+        Quantity = 1
+        Price = 0
+        Position = 0
+        ReqItem = 4033248
+        ReqItemQ = 3
+        Category = 7
+        MinLevel = 0
+        Expiration = 0
+        PointQuestExID = 0
+        PointPrice = 0
+        BuyLimit = 0
+        WorldBuyLimit = 1
+        LimitQuestExID = 0
+        LimitQuestExKey = 
+    }       
+    1 = {
+        ItemID = 2437188
+        Quantity = 1
+        Price = 0
+        Position = 1
+        ReqItem = 4033248
+        ReqItemQ = 12
+        Category = 7
+        MinLevel = 0
+        Expiration = 0
+        PointQuestExID = 0
+        PointPrice = 0
+        BuyLimit = 0
+        WorldBuyLimit = 1
+        LimitQuestExID = 0
+        LimitQuestExKey = 
+    }    
+    2 = {
+        ItemID = 2437187
+        Quantity = 1
+        Price = 0
+        Position = 2
+        ReqItem = 4033248
+        ReqItemQ = 36
+        Category = 7
+        MinLevel = 0
+        Expiration = 0
+        PointQuestExID = 0
+        PointPrice = 0
+        BuyLimit = 0
+        WorldBuyLimit = 1
+        LimitQuestExID = 0
+        LimitQuestExKey = 
+    }    
+}

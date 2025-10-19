@@ -1,0 +1,66 @@
+8645417 = {
+	0 = {
+		ItemID = 4031227
+		Chance = 100
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	1 = {
+		ItemID = 4310266
+		Chance = 360
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	2 = {
+		ItemID = 4310237
+		Chance = 360
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	3 = {
+		ItemID = 4310308
+		Chance = 210
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	4 = {
+		ItemID = 4009005
+		Chance = 360
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	5 = {
+		ItemID = 2437760
+		Chance = 170
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	6 = {
+		ItemID = 2633336
+		Chance = 170
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	7 = {
+		ItemID = 4001209
+		Chance = 100
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}	
+}

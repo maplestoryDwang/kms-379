@@ -1,0 +1,195 @@
+ExpRateR = {
+	0 = {
+		Value = 30
+		Weight = 3
+	}
+ 	1 = {
+		Value = 40
+		Weight = 5
+	} 
+	2 = {
+		Value = 50
+		Weight = 10
+	}	
+	Weight = 90
+}
+DropRateR = {
+	0 = {
+		Value = 20
+		Weight = 3
+	}
+ 	1 = {
+		Value = 25
+		Weight = 5
+	} 
+	2 = {
+		Value = 30
+		Weight = 10
+	}	
+	Weight = 80
+}
+MesoRateR = {
+	0 = {
+		Value = 20
+		Weight = 3
+	}
+ 	1 = {
+		Value = 25
+		Weight = 5
+	} 
+	2 = {
+		Value = 30
+		Weight = 10
+	}	
+	Weight = 80
+}
+ReduceCooltime = {
+	0 = {
+		Value = 1
+		Weight = 3
+	}
+ 	1 = {
+		Value = 2
+		Weight = 5
+	} 
+	Weight = 80
+}
+CriticalDamage = {
+	0 = {
+		Value = 8
+		Weight = 3
+	}
+ 	1 = {
+		Value = 9
+		Weight = 5
+	} 
+ 	2 = {
+		Value = 9
+		Weight = 10
+	} 
+	Weight = 90
+}
+AttackR = {
+	0 = {
+		Value = 12
+		Weight = 3
+	}
+ 	1 = {
+		Value = 14
+		Weight = 5
+	} 
+ 	2 = {
+		Value = 16
+		Weight = 10
+	} 
+	Weight = 90
+}
+BossDamageR = {
+	0 = {
+		Value = 30
+		Weight = 3
+	}
+ 	1 = {
+		Value = 35
+		Weight = 5
+	} 
+ 	2 = {
+		Value = 40
+		Weight = 10
+	} 
+	Weight = 90
+}
+IgnoreMobPdpR = {
+	0 = {
+		Value = 30
+		Weight = 3
+	}
+ 	1 = {
+		Value = 35
+		Weight = 5
+	} 
+ 	2 = {
+		Value = 40
+		Weight = 10
+	} 
+	Weight = 90
+}
+CriticalRate = {
+	0 = {
+		Value = 12
+		Weight = 3
+	}
+	Weight = 90
+}
+AllStatR = {
+	0 = {
+		Value = 18
+		Weight = 3
+	}
+	1 = {
+		Value = 21
+		Weight = 5
+	}
+	2 = {
+		Value = 23
+		Weight = 10
+	}
+	3 = {
+		Value = 25
+		Weight = 15
+	}
+	Weight = 90
+}
+MaxHpR = {
+	0 = {
+		Value = 15
+		Weight = 3
+	}
+	1 = {
+		Value = 16
+		Weight = 5
+	}
+	2 = {
+		Value = 17
+		Weight = 10
+	}
+	3 = {
+		Value = 18
+		Weight = 15
+	}
+	Weight = 90
+}
+Attack = {
+	0 = {
+		Value = 100
+		Weight = 3
+	}
+	1 = {
+		Value = 120
+		Weight = 5
+	}
+	2 = {
+		Value = 140
+		Weight = 10
+	}
+	3 = {
+		Value = 150
+		Weight = 15
+	}
+	Weight = 100
+}
+AllStat = {
+	0 = {
+		Value = 200
+		Weight = 3
+	}
+	1 = {
+		Value = 250
+		Weight = 5
+	}
+	2 = {
+		Value = 300
+		Weight = 10
+	}
+	Weight = 100
+}

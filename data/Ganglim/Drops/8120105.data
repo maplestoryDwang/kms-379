@@ -1,0 +1,26 @@
+8120105 = {
+	0 = {
+		ItemID = 4310266
+		Chance = 2000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	1 = {
+		ItemID = 4031227
+		Chance = 500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	2 = {
+		ItemID = 4001715
+		Chance = 1000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

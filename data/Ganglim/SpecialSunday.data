@@ -1,0 +1,38 @@
+﻿# 스페셜 선데이 메이플 이벤트를 적용할 수 있게 만드는 Properties입니다.
+# 일요일마다 활성화 됩니다.
+# activeSunday : 선데이 이벤트의 메인 스위치입니다. (false로 되어있으면 선데이 이벤트가 비활성화 됩니다.)
+# activeRuneEXP : 룬 경험치 버프 효과 + 100%를 활성화 시킵니다.
+# activeCombokillEXP : 콤보킬 구슬 경험치 획득량 + 300%를 활성화 시킵니다.
+# activeSpellTrace : 주문의 흔적 강화 비용 50% 할인을 활성화 시킵니다.
+# activeAbility : 어빌리티 재설정 비용 50% 할인을 활성화 시킵니다.
+# activeStarForceOpO : 스타포스 10성 이하 1+1 강화를 활성화 시킵니다.
+# activeStarForce100 : 스타포스 5, 10, 15성 100% 강화 성공을 활성화 시킵니다.
+# activeStarForceDiscount : 스타포스 강화 비용 30% 할인을 활성화 시킵니다.
+# activeSoulGacha : 위대한 소울 획득 확률 5배를 활성화 시킵니다.
+# activeMcUP : 몬스터 컬렉션 신규 몬스터 등록확률을 2배로 증가시킵니다.
+# #sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#룬 경험치 버프 효과 + #fc0xFFFFD800#100 #fc0xFFFFFFFF#%
+# #sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#콤보킬 구슬 경험치 획득량 + #fc0xFFFFD800#300 #fc0xFFFFFFFF#%
+# #sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#주문의 흔적 강화 비용 #fc0xFFFFD800#50 #fc0xFFFFFFFF#% 할인
+# #sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#어빌리티 재설정 비용 #fc0xFFFFD800#50 #fc0xFFFFFFFF#% 할인
+# #sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#스타포스 10성 이하 강화 성공 시 #fc0xFFFFD800#1+1 #fc0xFFFFFFFF#강화
+# #sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#스타포스 5, 10, 15성 #fc0xFFFFD800#100 #fc0xFFFFFFFF#% 강화 성공
+# #sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#스타포스 강화 비용 #fc0xFFFFD800#30 #fc0xFFFFFFFF#% 할인
+# #sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#위대한 소울 획득 확률 #fc0xFFFFD800#5 #fc0xFFFFFFFF#배
+# #sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#몬스터 컬렉션 신규 몬스터 등록 확률 #fc0xFFFFD800#2배 #fc0xFFFFFFFF#!
+
+
+
+activeSunday = false
+
+activeRuneEXP = true
+activeCombokillEXP = true
+activeSpellTrace = true
+activeAbility = true
+activeStarForceOpO = true
+activeStarForce100 = true
+activeStarForceDiscount = true
+activeSoulGacha = true
+activeMcUP = true
+
+sundayContext = \r\n\r\n\r\n#sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#룬 경험치 버프 효과 + #fc0xFFFFD800#100 #fc0xFFFFFFFF#%\r\n#sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#콤보킬 구슬 경험치 획득량 + #fc0xFFFFD800#300 #fc0xFFFFFFFF#%\r\n#sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#주문의 흔적 강화 비용 #fc0xFFFFD800#50 #fc0xFFFFFFFF#% 할인\r\n#sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#어빌리티 재설정 비용 #fc0xFFFFD800#50 #fc0xFFFFFFFF#% 할인\r\n#sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#스타포스 10성 이하 강화 성공 시 #fc0xFFFFD800#1+1 #fc0xFFFFFFFF#강화\r\n#sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#스타포스 5, 10, 15성 #fc0xFFFFD800#100 #fc0xFFFFFFFF#% 강화 성공\r\n#sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#스타포스 강화 비용 #fc0xFFFFD800#30 #fc0xFFFFFFFF#% 할인\r\n#sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#위대한 소울 획득 확률 #fc0xFFFFD800#5 #fc0xFFFFFFFF#배\r\n#sunday# #fn나눔고딕 ExtraBold##fs20##fc0xFFFFFFFF#몬스터 컬렉션 신규 몬스터 등록 확률 #fc0xFFFFD800#2배 #fc0xFFFFFFFF#!
+sundayTitle = #fn나눔고딕 ExtraBold##fs15##fc0xFFB7EC00#매주 일요일 강림월드의 썬데이 이벤트

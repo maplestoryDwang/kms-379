@@ -1,0 +1,117 @@
+package script.Boss;
+
+import database.DBConfig;
+import objects.fields.fieldset.childs.HardBlackMageEnter;
+import objects.fields.fieldset.childs.HardJinHillahEnter;
+import objects.fields.fieldset.childs.NormalJinHillahEnter;
+import objects.fields.gameobject.lifes.MapleLifeFactory;
+import scripting.ScriptMessageFlag;
+import scripting.newscripting.ScriptEngineNPC;
+import objects.context.party.Party;
+import objects.context.party.PartyMemberEntry;
+import objects.users.MapleCharacter;
+
+public class BlackMage extends ScriptEngineNPC {
+
+    public void bossBlackMage_pt() {
+        initNPC(MapleLifeFactory.getNPC(2007));
+        String Message = "검은 마법사와 대적하기 위해 #b어둠의 신전#k으로 이동할까?\r\n\r\n";
+        if (DBConfig.isGanglim) {
+            Message += "#L0#어둠의 신전(#b하드 모드#k)으로 이동한다. #r(레벨 255이상) #g[" + getPlayer().getOneInfoQuestInteger(1234570, "blackmage_clear") + "/" + (getPlayer().getBossTier() + 1) + "]#k#l\r\n";
+            Message += "#L1#어둠의 신전(#b하드 연습 모드#k)으로 이동한다. #r(레벨 255이상)#k#l\r\n\r\n";
+            Message += "#L2#이동하지 않는다.#l";
+        } else {
+            Message += "#L0##b어둠의 신전으로 이동한다.#k#l\r\n";
+            Message += "#L1##b어둠의 신전(연습모드)으로 이동한다.#k#l\r\n\r\n";
+            Message += "#L2#이동하지 않는다.#l";
+        }
+        int Menu = target.askMenu(Message, ScriptMessageFlag.BigScenario);
+        if (Menu == 2) return; //이동하지 않는다
+        if (target.getParty() == null) {
+            self.sayOk("1인 이상 파티를 맺어야만 입장할 수 있습니다.", ScriptMessageFlag.NpcReplacedByNpc);
+            return;
+        }
+        if (target.getParty().getLeader().getId() != target.getId()) {
+            self.sayOk("파티장을 통해 진행해 주십시오.", ScriptMessageFlag.NpcReplacedByNpc);
+            return;
+        }
+        if (!target.getParty().isPartySameMap()) {
+            self.sayOk("파티원이 모두 같은맵에 있어야 합니다.", ScriptMessageFlag.NpcReplacedByNpc);
+            return;
+        }
+        switch (Menu) { //따로 제한되는거 없으면 바로 입장가능함
+            case 0: { //하드모드
+                HardBlackMageEnter fieldSet = (HardBlackMageEnter) fieldSet("HardBlackMageEnter");
+                int enter = fieldSet.enter(target.getId(), false, 7);
+                if (enter == 6) {
+                    self.sayOk("이용 가능한 인스턴스가 없습니다. 다른 채널을 이용해주세요.", ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -3) {
+                    self.sayOk("입장 제한횟수가 부족한 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -4) {
+                    self.sayOk("입장 재료가 부족한 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -5) {
+                    self.sayOk("보스 티어가 부족한 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if ((enter == -1 || enter == 4)) {
+                    self.sayOk("입장 제한횟수가 부족하거나 레벨 제한이 맞지 않는 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -2) {
+                    self.sayOk("입장 제한시간이 남은 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                break;
+            }
+            case 1: { //하드 연습 모드
+                int practiceMode = self.askYesNo("연습 모드에 입장을 선택하였습니다. 연습 모드에서는 #b#e경험치와 보상을 얻을 수 없으며#n#k 보스 몬스터의 종류와 상관없이 #b#e하루 20회#n#k만 이용할 수 있습니다. 입장하시겠습니까?");
+                if (practiceMode == 0) {
+                    return;
+                }
+                HardBlackMageEnter fieldSet = (HardBlackMageEnter) fieldSet("HardBlackMageEnter");
+                int enter = fieldSet.enter(target.getId(), true, 7);
+                if (enter == 6) {
+                    self.sayOk("이용 가능한 인스턴스가 없습니다. 다른 채널을 이용해주세요.", ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -5) {
+                    self.sayOk("보스 티어가 부족한 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if ((enter == 4)) {
+                    self.sayOk("레벨 제한이 맞지 않는 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -1) {
+                    self.sayOk("연습 모드는 하루 20회만 가능합니다.", ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                break;
+            }
+        }
+    }
+
+    public void bmbossfield_out() {
+        if (this.npc == null) {
+            initNPC(MapleLifeFactory.getNPC(3005411));
+        }
+        if (self.askYesNo("전투를 중지하고 나가시겠습니까?") == 1) {
+            registerTransferField(450012500, 1);
+            if (getPlayer().getEventInstance() != null) {
+                getPlayer().getEventInstance().unregisterPlayer(getPlayer());
+                getPlayer().setEventInstance(null);
+                getPlayer().setRegisterTransferFieldTime(0);
+                getPlayer().setRegisterTransferField(0);
+            }
+            if (getPlayer().getBossMode() == 1) {
+                getPlayer().setBossMode(0);
+            }
+        }
+    }
+}

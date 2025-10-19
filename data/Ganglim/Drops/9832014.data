@@ -1,0 +1,26 @@
+9832014 = {
+	0 = {
+		ItemID = 4033339
+		Chance = 5
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	1 = {
+		ItemID = 4031227
+		Chance = 700
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	2 = {
+		ItemID = 4310237
+		Chance = 2500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

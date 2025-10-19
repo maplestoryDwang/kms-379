@@ -1,0 +1,186 @@
+8800102 = {
+	0 = {
+		ItemID = 2431710
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 2
+		Individual = 0
+	}
+	1 = {
+		ItemID = 2431710
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 2
+		Individual = 0
+	}
+	2 = {
+		ItemID = 2000005
+		Chance = 400000
+		QuestID = 0
+		Min = 60
+		Max = 75
+		Individual = 0
+	}
+	3 = {
+		ItemID = 2000005
+		Chance = 400000
+		QuestID = 0
+		Min = 45
+		Max = 50
+		Individual = 0
+	}
+	4 = {
+		ItemID = 4310308
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 2
+		Individual = 0
+	}
+	5 = {
+		ItemID = 4310308
+		Chance = 100000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	7 = {
+		ItemID = 2048716
+		Chance = 1000000
+		QuestID = 0
+		Min = 3
+		Max = 3
+		Individual = 0
+	}
+	8 = {
+		ItemID = 2048716
+		Chance = 400000
+		QuestID = 0
+		Min = 3
+		Max = 3
+		Individual = 0
+	}
+	9 = {
+		ItemID = 4310229
+		Chance = 1000000
+		QuestID = 0
+		Min = 15
+		Max = 30
+		Individual = 0
+	}
+	10 = {
+		ItemID = 4310229
+		Chance = 300000
+		QuestID = 0
+		Min = 15
+		Max = 30
+		Individual = 0
+	}
+	11 = {
+		ItemID = 4310229
+		Chance = 300000
+		QuestID = 0
+		Min = 15
+		Max = 30
+		Individual = 0
+	}
+	12 = {
+		ItemID = 4310237
+		Chance = 1000000
+		QuestID = 0
+		Min = 3
+		Max = 6
+		Individual = 0
+	}
+	13 = {
+		ItemID = 4310237
+		Chance = 500000
+		QuestID = 0
+		Min = 15
+		Max = 30
+		Individual = 0
+	}
+	14 = {
+		ItemID = 4001209
+		Chance = 500000
+		QuestID = 0
+		Min = 3
+		Max = 3
+		Individual = 0
+	}
+	15 = {
+		ItemID = 2435719
+		Chance = 50000
+		QuestID = 0
+		Min = 9
+		Max = 18
+		Individual = 0
+	}
+	16 = {
+		ItemID = 2435719
+		Chance = 50000
+		QuestID = 0
+		Min = 3
+		Max = 3
+		Individual = 0
+	}
+	17 = {
+		ItemID = 1004637
+		Chance = 300000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	18 = {
+		ItemID = 1102871
+		Chance = 300000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	19 = {
+		ItemID = 1132296
+		Chance = 300000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	20 = {
+		ItemID = 1003112
+		Chance = 200000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	21 = {
+		ItemID = 1372073
+		Chance = 200000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	22 = {
+		ItemID = 1012478
+		Chance = 350000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	23 = {
+		ItemID = 1022231
+		Chance = 350000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

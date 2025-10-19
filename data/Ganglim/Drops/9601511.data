@@ -1,0 +1,114 @@
+9601511 = {
+	0 = {
+		ItemID = 2430026
+		Chance = 4000
+		QuestID = 0
+		Min = 1
+		Max = 3
+		Individual = 0
+	}
+	2 = {
+		ItemID = 4310308
+		Chance = 1000000
+		QuestID = 0
+		Min = 40
+		Max = 45
+		Individual = 0
+	}
+	3 = {
+		ItemID = 4310237
+		Chance = 1000000
+		QuestID = 0
+		Min = 10
+		Max = 30
+		Individual = 0
+	}
+	4 = {
+		ItemID = 4310237
+		Chance = 100000
+		QuestID = 0
+		Min = 10
+		Max = 30
+		Individual = 0
+	}
+	5 = {
+		ItemID = 4310237
+		Chance = 70000
+		QuestID = 0
+		Min = 11
+		Max = 25
+		Individual = 0
+	}
+	6 = {
+		ItemID = 4310237
+		Chance = 70000
+		QuestID = 0
+		Min = 11
+		Max = 25
+		Individual = 0
+	}
+	7 = {
+		ItemID = 4310266
+		Chance = 1000000
+		QuestID = 0
+		Min = 5
+		Max = 15
+		Individual = 0
+	}
+	8 = {
+		ItemID = 4310266
+		Chance = 80000
+		QuestID = 0
+		Min = 5
+		Max = 15
+		Individual = 0
+	}
+	9 = {
+		ItemID = 4031227
+		Chance = 1000000
+		QuestID = 0
+		Min = 20
+		Max = 30
+		Individual = 0
+	}
+	10 = {
+		ItemID = 4038000
+		Chance = 3000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	11 = {
+		ItemID = 2048717
+		Chance = 600000
+		QuestID = 0
+		Min = 30
+		Max = 80
+		Individual = 0
+	}
+	12 = {
+		ItemID = 4310237
+		Chance = 600000
+		QuestID = 0
+		Min = 100
+		Max = 200
+		Individual = 0
+	}
+	13 = {
+		ItemID = 4009005
+		Chance = 300000
+		QuestID = 0
+		Min = 30
+		Max = 70
+		Individual = 0
+	}
+	14 = {
+		ItemID = 2048717
+		Chance = 500000
+		QuestID = 0
+		Min = 5
+		Max = 10
+		Individual = 0
+	}
+}

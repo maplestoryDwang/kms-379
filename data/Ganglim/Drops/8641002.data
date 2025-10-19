@@ -1,0 +1,34 @@
+8641002 = {
+	0 = {
+		ItemID = 2435719
+		Chance = 500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	1 = {
+		ItemID = 4034924
+		Chance = 100000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	2 = {
+		ItemID = 2435719
+		Chance = 500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	3 = {
+		ItemID = 2437760
+		Chance = 120
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

@@ -1,0 +1,20 @@
+1052206 = {
+	0 = {
+		ItemID = 2023072
+		Quantity = 1
+		Price = 0
+		Position = 0
+		ReqItem = 0
+		ReqItemQ = 1
+		Category = 1
+		MinLevel = 0
+		Expiration = 0
+		PointQuestExID = 16180
+		PointPrice = 1
+		BuyLimit = 0
+		WorldBuyLimit = 0
+		LimitQuestExID = 0
+		LimitQuestExKey = 
+		LimitQuestExValue = 0
+	}
+}

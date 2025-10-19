@@ -1,0 +1,162 @@
+DamageReduceR = {
+	0 = {
+		Value = 60
+		Weight = 3
+	}
+ 	1 = {
+		Value = 70
+		Weight = 5
+	} 
+	2 = {
+		Value = 80
+		Weight = 10
+	}
+	Weight = 100
+}
+Str = {
+	0 = {
+		Value = 80
+		Weight = 3
+	}
+ 	1 = {
+		Value = 90
+		Weight = 5
+	} 
+	2 = {
+		Value = 100
+		Weight = 10
+	}	
+	Weight = 100
+}
+Dex = {
+	0 = {
+		Value = 80
+		Weight = 3
+	}
+ 	1 = {
+		Value = 90
+		Weight = 5
+	} 
+	2 = {
+		Value = 100
+		Weight = 10
+	}	
+	Weight = 100
+}
+Int = {
+	0 = {
+		Value = 80
+		Weight = 3
+	}
+ 	1 = {
+		Value = 90
+		Weight = 5
+	} 
+	2 = {
+		Value = 100
+		Weight = 10
+	}	
+	Weight = 100
+}
+Luk = {
+	0 = {
+		Value = 80
+		Weight = 3
+	}
+ 	1 = {
+		Value = 90
+		Weight = 5
+	} 
+	2 = {
+		Value = 100
+		Weight = 10
+	}	
+	Weight = 100
+}
+AllStat = {
+	0 = {
+		Value = 50
+		Weight = 3
+	}
+ 	1 = {
+		Value = 60
+		Weight = 5
+	} 
+	2 = {
+		Value = 70
+		Weight = 10
+	}	
+	3 = {
+		Value = 80
+		Weight = 15
+	}
+	Weight = 100
+}
+MaxHpR = {
+	0 = {
+		Value = 6
+		Weight= 3
+	}
+	1 = {
+		Value = 7
+		Weight= 5
+	}
+	2 = {
+		Value = 8
+		Weight= 10
+	}
+	3 = {
+		Value = 9
+		Weight= 15
+	}
+	Weight = 90
+}
+MaxHp = {
+	0 = {
+		Value = 3000
+		Weight = 3
+	}
+ 	1 = {
+		Value = 4000
+		Weight = 5
+	} 
+	2 = {
+		Value = 5000
+		Weight = 10
+	}	
+	Weight = 100
+}
+Attack = {
+	0 = {
+		Value = 30
+		Weight = 3
+	}
+ 	1 = {
+		Value = 40
+		Weight = 5
+	} 
+	2 = {
+		Value = 50
+		Weight = 10
+	}	
+	Weight = 100
+}
+AttackR = {
+	0 = {
+		Value = 3
+		Weight = 3
+	}
+ 	1 = {
+		Value = 4
+		Weight = 5
+	} 
+	2 = {
+		Value = 5
+		Weight = 10
+	}	
+	3 = {
+		Value = 5
+		Weight = 15
+	}	
+	Weight = 70
+}

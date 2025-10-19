@@ -1,0 +1,1257 @@
+package script.Boss;
+
+import constants.QuestExConstants;
+import database.DBConfig;
+import network.models.CField;
+import network.models.CWvsContext;
+import objects.effect.child.PlayMusicDown;
+import objects.fields.Field;
+import objects.fields.Portal;
+import objects.fields.gameobject.lifes.ChangeableStats;
+import objects.fields.gameobject.lifes.MapleLifeFactory;
+import objects.fields.gameobject.lifes.MapleMonster;
+import objects.users.MapleCharacter;
+import scripting.EventInstanceManager;
+import scripting.EventManager;
+import scripting.newscripting.ScriptEngineNPC;
+
+import java.awt.*;
+
+public class RootAbyss extends ScriptEngineNPC {
+
+    public void rootafirstDoor() { //피에르
+        //30분 재입장가능함
+        //105200200 서쪽정원(노말)
+        //105200210 삐에르 보스맵
+        //105200600 서쪽정원<카오스>
+        //105200610 삐에르 보스맵<카오스>
+        initNPC(MapleLifeFactory.getNPC(1064012));
+        EventManager em = getEventManager("RootAbyssPierre");
+        if (em == null) {
+            self.say("지금은 이용하실 수 없습니다.");
+        } else {
+        	String text = "";
+        	if (DBConfig.isGanglim) {
+        		text = "#r#e<루타비스 서쪽 정원 입구>#n#k\r\n루타비스 서쪽 봉인의 수호자인 #r피에르#k가 지키고 있는 정원으로 가는 문이다. 클리어 기록은 당일 자정에 초기화 됩니다.";
+                text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드로 이동한다.(125레벨 이상)";
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.Pierre.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#k";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[노말 피에르] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.Pierre.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+                text += "\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드로 이동한다.(180레벨 이상)";
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.ChaosPierre.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#b";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[카오스 피에르] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.ChaosPierre.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+                text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";
+        	}
+        	else {
+        		boolean single = getPlayer().getPartyMemberSize() == 1;
+        		text = "#r#e<루타비스 서쪽 정원 입구>#n#k\r\n";
+        		text += "루타비스 서쪽 봉인의 수호자인 #r피에르#k가 지키고 있는 정원으로 가는 문이다. #r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b";
+                text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드" + (single ? "(싱글)" : "(멀티)") + "로 이동한다.(125레벨 이상)";
+                text += "\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드" + (single ? "(싱글)" : "(멀티)") + "로 이동한다.(180레벨 이상)";
+                int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalPierre" + (single ? "Single" : "Multi"));
+                text += "\r\n#L4#노멀 모드" + (single ? "(싱글)" : "(멀티)") + " 입장 횟수 증가" + ((single ? 2 : 1) - reset) + "회 가능 #l";
+        	}
+            
+        	int v0 = self.askMenu(text);
+            if (target.getParty() == null) {
+                target.say("파티를 맺어야만 입장할 수 있는 것 같군. 파티를 찾아보자.");
+                return;
+            } else {
+            	if (v0 == 4 && !DBConfig.isGanglim) {
+            		if (getPlayer().getTogetherPoint() < 150) {
+            			self.sayOk("협동 포인트가 부족합니다. 현재 포인트 : " + getPlayer().getTogetherPoint());
+            			return;
+            		}
+            		boolean single = getPlayer().getPartyMemberSize() == 1;
+            		int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalPierre" + (single ? "Single" : "Multi"));
+            		if ((reset > 0 && !single) || reset > 1 && single) { //초기화 불가능
+                    	self.sayOk("일일 추가입장 횟수 증가를 모두 사용하였습니다.");
+                    	return;
+                    }
+            		getPlayer().gainTogetherPoint(-150);
+            		getPlayer().updateOneInfo(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalPierre" + (single ? "Single" : "Multi"), String.valueOf(reset + 1));
+            		self.sayOk("입장 횟수가 증가되었습니다.");
+            		return;
+            	}
+                if (v0 == 0) { //노말모드
+                    if (target.getParty().isPartySameMap()) {
+                        if (em.getProperty("status0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.Pierre.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.Pierre.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+
+                                        em.setProperty("status0", "1");
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200200);
+                                        eim.setProperty("mode", "normal");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200200).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200200).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200210).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200200).setLastRespawnTime(Long.MAX_VALUE);
+
+                                        updateLastDate(getPlayer(), QuestExConstants.Pierre.getQuestID());
+                                        if (DBConfig.isGanglim) { 
+                                            updateQuestEx(getPlayer(), QuestExConstants.Pierre.getQuestID());
+                                        }
+                                        if (!DBConfig.isGanglim && getPlayer().getPartyMemberSize() > 1) {
+                                           	for (MapleCharacter partyMember : getPlayer().getPartyMembers()) {
+                                           		if (partyMember.getMapId() == getPlayer().getMapId()) {
+                                           			partyMember.setMultiMode(true);
+                                           			partyMember.applyBMCurseJinMulti();
+                                          		}
+                                          	}
+                                        }
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                target.say("파티원 중 #b#e" + overLap + "#n#k님은 오늘 이미 도전하여 도전할 수 없습니다.");
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else {
+                        self.say("파티원 모두 같은맵에 있으셔야 합니다.");
+                    }
+                } else if (v0 == 1) { //카오스모드
+                    if (target.getParty().isPartySameMap()) {
+                        if (em.getProperty("Cstatus0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.ChaosPierre.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.ChaosPierre.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("Cstatus0", "1");
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200600);
+                                        eim.setProperty("mode", "chaos");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200600).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200600).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200610).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200600).setLastRespawnTime(Long.MAX_VALUE);
+                                        updateLastDate(getPlayer(), QuestExConstants.ChaosPierre.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.ChaosPierre.getQuestID());
+                                        }
+                                        if (!DBConfig.isGanglim && getPlayer().getPartyMemberSize() > 1) {
+                                           	for (MapleCharacter partyMember : getPlayer().getPartyMembers()) {
+                                           		if (partyMember.getMapId() == getPlayer().getMapId()) {
+                                           			partyMember.setMultiMode(true);
+                                           			partyMember.applyBMCurseJinMulti();
+                                          		}
+                                          	}
+                                        }
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                if (DBConfig.isGanglim) {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 금일에 이미 도전하여 도전할 수 없습니다.");
+                                } else {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 이번주에 이미 도전하여 도전할 수 없습니다.");
+                                }
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else {
+                        self.say("파티원 모두 같은맵에 있으셔야 합니다.");
+                    }
+                } else if (v0 == 2) { //연습모드
+                    self.say("연습모드는 현재 준비중입니다.");
+                }
+            }
+        }
+    }
+
+    public void pierreEnter() { //피에르
+    	if (!DBConfig.isGanglim) {
+    		rootafirstDoor();
+    		return;
+    	}
+        EventManager em = getEventManager("RootAbyssPierre");
+        if (em == null) {
+            self.say("지금은 이용하실 수 없습니다.");
+        } else {
+            String text = "#r#e<루타비스 서쪽 정원 입구>#n#k\r\n루타비스 서쪽 봉인의 수호자인 #r피에르#k가 지키고 있는 정원으로 가는 문이다. " + (DBConfig.isGanglim ? "클리어 기록은 당일 자정에 초기화 됩니다." : "#r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b");
+            text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드로 이동한다.(125레벨 이상)";
+            if (DBConfig.isGanglim) {
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.Pierre.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#k";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[노말 피에르] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.Pierre.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            }
+            text += "\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드로 이동한다.(180레벨 이상)";
+            if (DBConfig.isGanglim) {
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.ChaosPierre.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#b";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[카오스 피에르] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.ChaosPierre.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            }
+            text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";
+            int v0 = self.askMenu(text);
+            if (target.getParty() == null) {
+                target.say("파티를 맺어야만 입장할 수 있는 것 같군. 파티를 찾아보자.");
+            } else {
+                if (v0 == 0) { //노말모드
+                    if (target.getParty().isPartySameMap()) {
+                        if (em.getProperty("status0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.Pierre.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.Pierre.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("status0", "1");
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200200);
+                                        eim.setProperty("mode", "normal");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200200).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200200).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200210).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200200).setLastRespawnTime(Long.MAX_VALUE);
+
+                                        updateLastDate(getPlayer(), QuestExConstants.Pierre.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.Pierre.getQuestID());
+                                        }
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                target.say("파티원 중 #b#e" + overLap + "#n#k님은 오늘 이미 도전하여 도전할 수 없습니다.");
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else {
+                        self.say("파티원 모두 같은맵에 있으셔야 합니다.");
+                    }
+                } else if (v0 == 1) { //카오스모드
+                    if (target.getParty().isPartySameMap()) {
+                        if (em.getProperty("Cstatus0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.ChaosPierre.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.ChaosPierre.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("Cstatus0", "1");
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200600);
+                                        eim.setProperty("mode", "chaos");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200600).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200600).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200610).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200600).setLastRespawnTime(Long.MAX_VALUE);
+                                        updateLastDate(getPlayer(), QuestExConstants.ChaosPierre.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.ChaosPierre.getQuestID());
+                                        }
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                if (DBConfig.isGanglim) {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 금일에 이미 도전하여 도전할 수 없습니다.");
+                                } else {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 이번주에 이미 도전하여 도전할 수 없습니다.");
+                                }
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else {
+                        self.say("파티원 모두 같은맵에 있으셔야 합니다.");
+                    }
+                } else if (v0 == 2) { //연습모드
+                    self.say("연습모드는 현재 준비중입니다.");
+                }
+            }
+        }
+    }
+
+    //피에르의 티파티에에
+
+    public void pierre_Summon() { //노말 피에르 
+        EventInstanceManager eim = getEventInstance();
+        if (eim != null) {
+            if (eim.getProperty("summonMOB") == null) {
+                eim.setProperty("summonMOB", "1");
+                Field field = getPlayer().getMap();
+                field.broadcastMessage(CField.environmentChange("rootabyss/firework", 19));
+                field.startMapEffect("피에르의 티파티에 온 것을 진심으로 환영한다네!", 5120098, 3000);
+                PlayMusicDown e = new PlayMusicDown(getPlayer().getId(), 100, "Field.img/rootabyss/firework");
+                field.broadcastMessage(e.encodeForLocal());
+                if (DBConfig.isGanglim) {
+                	field.spawnMonster(MapleLifeFactory.getMonster(8900100), new Point(1000, 551), 1);
+                }
+                else {
+                	if (!getPlayer().isMultiMode()) {
+                		field.spawnMonster(MapleLifeFactory.getMonster(8900100), new Point(1000, 551), 1);
+                	}
+                	else {
+                		final MapleMonster pierre = MapleLifeFactory.getMonster(8900100);
+                		pierre.setPosition(new Point(1000, 551));
+                		final long hp = pierre.getMobMaxHp();
+                		long fixedhp = hp * 3L;
+                        if (fixedhp < 0) {
+                        	fixedhp = Long.MAX_VALUE;
+                        }
+                        pierre.setHp(fixedhp);
+                        pierre.setMaxHp(fixedhp);
+
+                        field.spawnMonster(pierre, 1);
+                	}
+                }
+            }
+        }
+    }
+
+    public void pierre_Summon1() {
+        EventInstanceManager eim = getEventInstance();
+        if (eim != null) {
+            if (eim.getProperty("summonMOB") == null) {
+                eim.setProperty("summonMOB", "1");
+                Field field = getPlayer().getMap();
+                field.broadcastMessage(CField.environmentChange("rootabyss/firework", 19));
+                field.startMapEffect("피에르의 티파티에 온 것을 진심으로 환영한다네!", 5120098, 3000);
+                PlayMusicDown e = new PlayMusicDown(getPlayer().getId(), 100, "Field.img/rootabyss/firework");
+                field.broadcastMessage(e.encodeForLocal());
+                field.spawnMonster(MapleLifeFactory.getMonster(8900000), new Point(1000, 551), 1);
+            }
+        }
+    }
+
+    public void rootasecondDoor() { //반반
+        //동쪽정원 105200100
+        //카오스동쪽정원 105200500
+        //차원의 틈에서 반반을 소환하자
+        //반반은 뒤지면 바로템줌
+        initNPC(MapleLifeFactory.getNPC(1064013));
+        EventManager em = getEventManager("RootAbyssVonbon");
+        if (em == null) {
+            self.say("지금은 이용하실 수 없습니다.");
+        } else {
+        	String text = "";
+        	if (DBConfig.isGanglim) {
+        		text = "#r#e<루타비스 동쪽 정원 입구>#n#k\r\n루타비스 동쪽 봉인의 수호자인 #r반반#k이 지키고 있는 정원으로 가는 문이다. " + (DBConfig.isGanglim ? "클리어 기록은 당일 자정에 초기화 됩니다." : "#r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b") + "\r\n'";
+                text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드로 이동한다.(125레벨 이상)";
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.VonBon.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#k";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[노말 반반] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.VonBon.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+                text += "#l\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드로 이동한다.(180레벨 이상)";
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.ChaosVonBon.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#b";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[카오스 반반] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.ChaosVonBon.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+                text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";
+        	}
+        	else {
+        		boolean single = getPlayer().getPartyMemberSize() == 1;
+        		text = "#r#e<루타비스 동쪽 정원 입구>#n#k\r\n루타비스 동쪽 봉인의 수호자인 #r반반#k이 지키고 있는 정원으로 가는 문이다. " + (DBConfig.isGanglim ? "클리어 기록은 당일 자정에 초기화 됩니다." : "#r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b") + "\r\n'";
+                text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드"  + (single ? "(싱글)" : "(멀티)") +  "로 이동한다.(125레벨 이상)";
+                text += "#l\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드"  + (single ? "(싱글)" : "(멀티)") + "로 이동한다.(180레벨 이상)";
+                //text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";
+                int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalVonBon" + (single ? "Single" : "Multi"));
+                text += "\r\n#L4#노멀 모드" + (single ? "(싱글)" : "(멀티)") + " 입장 횟수 증가" + ((single ? 2 : 1) - reset) + "회 가능 #l";
+        	}
+            int v0 = self.askMenu(text);
+            if (target.getParty() == null) {
+                target.say("파티를 맺어야만 입장할 수 있는 것 같군. 파티를 찾아보자.");
+                return;
+            } else {
+            	if (v0 == 4 && !DBConfig.isGanglim) {
+            		if (getPlayer().getTogetherPoint() < 150) {
+            			self.sayOk("협동 포인트가 부족합니다. 현재 포인트 : " + getPlayer().getTogetherPoint());
+            			return;
+            		}
+            		boolean single = getPlayer().getPartyMemberSize() == 1;
+            		int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalVonBon" + (single ? "Single" : "Multi"));
+            		if ((reset > 0 && !single) || reset > 1 && single) { //초기화 불가능
+                    	self.sayOk("일일 추가입장 횟수 증가를 모두 사용하였습니다.");
+                    	return;
+                    }
+            		getPlayer().gainTogetherPoint(-150);
+            		getPlayer().updateOneInfo(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalVonBon" + (single ? "Single" : "Multi"), String.valueOf(reset + 1));
+            		self.sayOk("입장 횟수가 증가되었습니다.");
+            		return;
+            	}
+                if (target.getParty().isPartySameMap()) {
+                    if (v0 == 0) { //노말모드
+                        if (em.getProperty("status0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.VonBon.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.VonBon.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("status0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.VonBon.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.VonBon.getQuestID());
+                                        }
+                                        if (!DBConfig.isGanglim && getPlayer().getPartyMemberSize() > 1) {
+                                            for (MapleCharacter partyMember : getPlayer().getPartyMembers()) {
+                                            	if (partyMember.getMapId() == getPlayer().getMapId()) {
+                                               		partyMember.setMultiMode(true);
+                                               		partyMember.applyBMCurseJinMulti();
+                                              	}
+                                            }
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200100);
+                                        eim.setProperty("mode", "normal");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200100).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200100).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200110).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200100).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                target.say("파티원 중 #b#e" + overLap + "#n#k님은 오늘 이미 도전하여 도전할 수 없습니다.");
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 1) { //카오스모드
+                        if (em.getProperty("Cstatus0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.ChaosVonBon.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.ChaosVonBon.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("Cstatus0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.ChaosVonBon.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.ChaosVonBon.getQuestID());
+                                        }
+                                        if (!DBConfig.isGanglim && getPlayer().getPartyMemberSize() > 1) {
+                                            for (MapleCharacter partyMember : getPlayer().getPartyMembers()) {
+                                            	if (partyMember.getMapId() == getPlayer().getMapId()) {
+                                               		partyMember.setMultiMode(true);
+                                               		partyMember.applyBMCurseJinMulti();
+                                              	}
+                                            }
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200500);
+                                        eim.setProperty("mode", "chaos");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200500).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200500).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200510).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200500).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                if (DBConfig.isGanglim) {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 금일에 이미 도전하여 도전할 수 없습니다.");
+                                } else {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 이번주에 이미 도전하여 도전할 수 없습니다.");
+                                }
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 2) { //연습모드
+                        self.say("연습모드는 현재 준비중입니다.");
+                    }
+                } else {
+                    self.say("파티원 모두 같은맵에 있으셔야 합니다.");
+                }
+            }
+        }
+    }
+
+    public void banbanEnter() { //반반
+    	if (!DBConfig.isGanglim) {
+    		rootasecondDoor();
+    		return;
+    	}
+        EventManager em = getEventManager("RootAbyssVonbon");
+        if (em == null) {
+            self.say("지금은 이용하실 수 없습니다.");
+        } else {
+            String text = "#r#e<루타비스 동쪽 정원 입구>#n#k\r\n루타비스 동쪽 봉인의 수호자인 #r반반#k이 지키고 있는 정원으로 가는 문이다. " + (DBConfig.isGanglim ? "클리어 기록은 당일 자정에 초기화 됩니다." : "#r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b") + "\r\n'";
+            text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드로 이동한다.(125레벨 이상)";
+            if (DBConfig.isGanglim) {
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.VonBon.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#k";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[노말 반반] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.VonBon.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            }
+            text += "#l\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드로 이동한다.(180레벨 이상)";
+            if (DBConfig.isGanglim) {
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.ChaosVonBon.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#b";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[카오스 반반] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.ChaosVonBon.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            }
+            text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";
+            int v0 = self.askMenu(text);
+            if (target.getParty() == null) {
+                target.say("파티를 맺어야만 입장할 수 있는 것 같군. 파티를 찾아보자.");
+            } else {
+                if (target.getParty().isPartySameMap()) {
+                    if (v0 == 0) { //노말모드
+                        if (em.getProperty("status0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.VonBon.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.VonBon.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("status0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.VonBon.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.VonBon.getQuestID());
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200100);
+                                        eim.setProperty("mode", "normal");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200100).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200100).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200110).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200100).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                target.say("파티원 중 #b#e" + overLap + "#n#k님은 오늘 이미 도전하여 도전할 수 없습니다.");
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 1) { //카오스모드
+                        if (em.getProperty("Cstatus0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.ChaosVonBon.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.ChaosVonBon.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("Cstatus0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.ChaosVonBon.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.ChaosVonBon.getQuestID());
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200500);
+                                        eim.setProperty("mode", "chaos");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200500).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200500).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200510).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200500).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                if (DBConfig.isGanglim) {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 금일에 이미 도전하여 도전할 수 없습니다.");
+                                } else {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 이번주에 이미 도전하여 도전할 수 없습니다.");
+                                }
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 2) { //연습모드
+                        self.say("연습모드는 현재 준비중입니다.");
+                    }
+                } else {
+                    self.say("파티원 모두 같은맵에 있으셔야 합니다.");
+                }
+            }
+        }
+    }
+
+    public void banban_Summon() {
+        //
+        EventInstanceManager eim = getEventInstance();
+        if (eim != null) {
+            if (eim.getProperty("summonMOB") == null) {
+                eim.setProperty("summonMOB", "1");
+                Field field = getPlayer().getMap();
+                field.broadcastMessage(CField.environmentChange("Bgm29.img/banbantime", 19));
+                field.startMapEffect("차원의 틈에서 반반을 소환하자.", 5120025, 3000);
+            }
+        }
+    }
+
+    public void banbanInsideMob() {
+        MapleMonster mob = MapleLifeFactory.getMonster(8910001);
+        if (mob != null) {
+            Field field = getPlayer().getMap();
+            field.spawnMonsterOnGroundBelow(mob, new Point(-50, 245));
+        }
+    }
+
+    public void banbanGoInside() {
+        Portal portal = getPortal();
+        Field field = getPlayer().getMap();
+        if (portal.getId() == 2) {
+            if (field.isObjectEnable("Pt01gate")) {
+                registerTransferField(field.getId() + 10);
+            }
+        }
+        if (portal.getId() == 3) {
+            if (field.isObjectEnable("Pt02gate")) {
+                registerTransferField(field.getId() + 10);
+            }
+        }
+        if (portal.getId() == 4) {
+            if (field.isObjectEnable("Pt03gate")) {
+                registerTransferField(field.getId() + 10);
+            }
+        }
+        if (portal.getId() == 5) {
+            if (field.isObjectEnable("Pt04gate")) {
+                registerTransferField(field.getId() + 10);
+            }
+        }
+        if (portal.getId() == 6) {
+            if (field.isObjectEnable("Pt05gate")) {
+                registerTransferField(field.getId() + 10);
+            }
+        }
+        if (portal.getId() == 7) {
+            if (field.isObjectEnable("Pt06gate")) {
+                registerTransferField(field.getId() + 10);
+            }
+        }
+        if (portal.getId() == 8) {
+            if (field.isObjectEnable("Pt07gate")) {
+                registerTransferField(field.getId() + 10);
+            }
+        }
+        if (portal.getId() == 9) {
+            if (field.isObjectEnable("Pt08gate")) {
+                registerTransferField(field.getId() + 10);
+            }
+        }
+        if (portal.getId() == 10) {
+            if (field.isObjectEnable("Pt09gate")) {
+                registerTransferField(field.getId() + 10);
+            }
+        }
+    }
+
+    public void rootathirdDoor() { //블러디 퀸
+        //남쪽정원, 여왕의 성 노말, 카오스
+        //105200300, 105200310
+        //105200700, 105200710
+        //잠든 블러디 퀸에게 말을 걸어보자
+        //어머, 귀여운
+        //무엄하다!
+        //킥킥, 여기가
+        //흑흑, 당신의 죽음을
+        //상자 부숴야 나옴
+        initNPC(MapleLifeFactory.getNPC(1064014));
+        EventManager em = getEventManager("RootAbyssCrimsonQueen");
+        if (em == null) {
+            self.say("지금은 이용하실 수 없습니다.");
+        } else {
+        	String text = "";
+        	if (DBConfig.isGanglim) {
+        		text = "#r#e<루타비스 남쪽 정원 입구>#n#k\r\n루타비스 남쪽 봉인의 수호자인 #r블러디 퀸#k이 지키고 있는 정원으로 가는 문이다. " + (DBConfig.isGanglim ? "클리어 기록은 당일 자정에 초기화 됩니다." : "#r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b") + "\r\n";
+                text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드로 이동한다.(125레벨 이상)";
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.CrimsonQueen.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#k";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[노말 블러디 퀸] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.CrimsonQueen.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            	text += "#l\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드로 이동한다.(180레벨 이상)";
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.ChaosCrimsonQueen.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#b";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[카오스 블러디 퀸] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.ChaosCrimsonQueen.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            	text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";
+        	}
+        	else {
+        		boolean single = getPlayer().getPartyMemberSize() == 1;
+        		text = "#r#e<루타비스 남쪽 정원 입구>#n#k\r\n루타비스 남쪽 봉인의 수호자인 #r블러디 퀸#k이 지키고 있는 정원으로 가는 문이다. " + (DBConfig.isGanglim ? "클리어 기록은 당일 자정에 초기화 됩니다." : "#r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b") + "\r\n";
+                text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드"  + (single ? "(싱글)" : "(멀티)") +  "로 이동한다.(125레벨 이상)";
+            	text += "#l\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드"  + (single ? "(싱글)" : "(멀티)") +  "로 이동한다.(180레벨 이상)";
+            	//text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";
+            	int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalCrimsonQueen" + (single ? "Single" : "Multi"));
+                text += "\r\n#L4#노멀 모드" + (single ? "(싱글)" : "(멀티)") + " 입장 횟수 증가" + ((single ? 2 : 1) - reset) + "회 가능 #l";
+        	}
+            
+            int v0 = self.askMenu(text);
+            if (target.getParty() == null) {
+                target.say("파티를 맺어야만 입장할 수 있는 것 같군. 파티를 찾아보자.");
+                return;
+            } else {
+            	if (v0 == 4 && !DBConfig.isGanglim) {
+            		if (getPlayer().getTogetherPoint() < 150) {
+            			self.sayOk("협동 포인트가 부족합니다. 현재 포인트 : " + getPlayer().getTogetherPoint());
+            			return;
+            		}
+            		boolean single = getPlayer().getPartyMemberSize() == 1;
+            		int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalCrimsonQueen" + (single ? "Single" : "Multi"));
+            		if ((reset > 0 && !single) || reset > 1 && single) { //초기화 불가능
+                    	self.sayOk("일일 추가입장 횟수 증가를 모두 사용하였습니다.");
+                    	return;
+                    }
+            		getPlayer().gainTogetherPoint(-150);
+            		getPlayer().updateOneInfo(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalCrimsonQueen" + (single ? "Single" : "Multi"), String.valueOf(reset + 1));
+            		self.sayOk("입장 횟수가 증가되었습니다.");
+            		return;
+            	}
+                if (target.getParty().isPartySameMap()) {
+                    if (v0 == 0) { //노말모드
+                        if (em.getProperty("status0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.CrimsonQueen.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.CrimsonQueen.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("status0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.CrimsonQueen.getQuestID());
+                                        if (DBConfig.isGanglim) { 
+                                            updateQuestEx(getPlayer(), QuestExConstants.CrimsonQueen.getQuestID());
+                                        }
+                                    	if (!DBConfig.isGanglim && getPlayer().getPartyMemberSize() > 1) {
+                                            for (MapleCharacter partyMember : getPlayer().getPartyMembers()) {
+                                            	if (partyMember.getMapId() == getPlayer().getMapId()) {
+                                               		partyMember.setMultiMode(true);
+                                               		partyMember.applyBMCurseJinMulti();
+                                              	}
+                                            }
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200300);
+                                        eim.setProperty("mode", "normal");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200300).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200300).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200310).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200300).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                target.say("파티원 중 #b#e" + overLap + "#n#k님은 오늘 이미 도전하여 도전할 수 없습니다.");
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 1) { //카오스모드
+                        if (em.getProperty("Cstatus0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.ChaosCrimsonQueen.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.ChaosCrimsonQueen.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("Cstatus0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.ChaosCrimsonQueen.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.ChaosCrimsonQueen.getQuestID());
+                                        }
+                                        if (!DBConfig.isGanglim && getPlayer().getPartyMemberSize() > 1) {
+                                            for (MapleCharacter partyMember : getPlayer().getPartyMembers()) {
+                                            	if (partyMember.getMapId() == getPlayer().getMapId()) {
+                                               		partyMember.setMultiMode(true);
+                                               		partyMember.applyBMCurseJinMulti();
+                                              	}
+                                            }
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200700);
+                                        eim.setProperty("mode", "chaos");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200700).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200700).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200710).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200700).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                if (DBConfig.isGanglim) {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 금일에 이미 도전하여 도전할 수 없습니다.");
+                                } else {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 이번주에 이미 도전하여 도전할 수 없습니다.");
+                                }
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 2) { //연습모드
+                        self.say("연습모드는 현재 준비중입니다.");
+                    }
+                } else {
+                    self.say("파티원 모두 같은맵에 있으셔야 합니다.");
+                }
+            }
+        }
+    }
+
+    public void bloodyqueenEnter() { //블러디 퀸
+    	if (!DBConfig.isGanglim) {
+    		rootathirdDoor();
+    		return;
+    	}
+        EventManager em = getEventManager("RootAbyssCrimsonQueen");
+        if (em == null) {
+            self.say("지금은 이용하실 수 없습니다.");
+        } else {
+            String text = "#r#e<루타비스 남쪽 정원 입구>#n#k\r\n루타비스 남쪽 봉인의 수호자인 #r블러디 퀸#k이 지키고 있는 정원으로 가는 문이다. " + (DBConfig.isGanglim ? "클리어 기록은 당일 자정에 초기화 됩니다." : "#r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b") + "\r\n";
+            text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드로 이동한다.(125레벨 이상)";
+            if (DBConfig.isGanglim) {
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.CrimsonQueen.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#k";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[노말 블러디 퀸] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.CrimsonQueen.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            }
+            text += "#l\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드로 이동한다.(180레벨 이상)";
+            if (DBConfig.isGanglim) {
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.ChaosCrimsonQueen.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#b";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[카오스 블러디 퀸] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.ChaosCrimsonQueen.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            }
+            text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";
+            int v0 = self.askMenu(text);
+            if (target.getParty() == null) {
+                target.say("파티를 맺어야만 입장할 수 있는 것 같군. 파티를 찾아보자.");
+            } else {
+                if (target.getParty().isPartySameMap()) {
+                    if (v0 == 0) { //노말모드
+                        if (em.getProperty("status0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.CrimsonQueen.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.CrimsonQueen.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("status0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.CrimsonQueen.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.CrimsonQueen.getQuestID());
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200300);
+                                        eim.setProperty("mode", "normal");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200300).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200300).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200310).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200300).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                target.say("파티원 중 #b#e" + overLap + "#n#k님은 오늘 이미 도전하여 도전할 수 없습니다.");
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 1) { //카오스모드
+                        if (em.getProperty("Cstatus0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.ChaosCrimsonQueen.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.ChaosCrimsonQueen.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("Cstatus0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.ChaosCrimsonQueen.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.ChaosCrimsonQueen.getQuestID());
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200700);
+                                        eim.setProperty("mode", "chaos");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200700).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200700).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200710).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200700).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                if (DBConfig.isGanglim) {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 금일에 이미 도전하여 도전할 수 없습니다.");
+                                } else {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 이번주에 이미 도전하여 도전할 수 없습니다.");
+                                }
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 2) { //연습모드
+                        self.say("연습모드는 현재 준비중입니다.");
+                    }
+                } else {
+                    self.say("파티원 모두 같은맵에 있으셔야 합니다.");
+                }
+            }
+        }
+    }
+
+    public void queen_summon0() {
+        EventInstanceManager eim = getEventInstance();
+        if (eim != null) {
+            if (eim.getProperty("summonMOB") == null) {
+                eim.setProperty("summonMOB", "1");
+                Field field = getPlayer().getMap();
+                field.startMapEffect("잠든 블러디 퀸에게 말을 걸어보자.", 5120025, 3000);
+            }
+        }
+    }
+
+    public void rootaforthDoor() { //벨룸
+        //북쪽정원
+        //105200400, 105200800
+        //벨룸이 보이지 않는다
+        // 내 경고를
+        initNPC(MapleLifeFactory.getNPC(1064014));
+        EventManager em = getEventManager("RootAbyssVellum");
+        if (em == null) {
+            self.say("지금은 이용하실 수 없습니다.");
+        } else {
+        	String text = "";
+        	if (DBConfig.isGanglim) {
+        		text = "#r#e<루타비스 북쪽 정원 입구>#n#k\r\n루타비스 북쪽 봉인의 수호자인 #r벨룸#k이 지키고 있는 정원으로 가는 문이다. " + (DBConfig.isGanglim ? "클리어 기록은 당일 자정에 초기화 됩니다." : "#r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b") + "\r\n";
+                text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드로 이동한다.(125레벨 이상)";
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.Vellum.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#k";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[노말 벨룸] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.Vellum.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            	text += "#l\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드로 이동한다.(180레벨 이상)";
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.ChaosVellum.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#b";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[카오스 벨룸] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.ChaosVellum.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            	text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";      
+        	}
+        	else {
+        		boolean single = getPlayer().getPartyMemberSize() == 1;
+        		text = "#r#e<루타비스 북쪽 정원 입구>#n#k\r\n루타비스 북쪽 봉인의 수호자인 #r벨룸#k이 지키고 있는 정원으로 가는 문이다. " + (DBConfig.isGanglim ? "클리어 기록은 당일 자정에 초기화 됩니다." : "#r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b") + "\r\n";
+                text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드"  + (single ? "(싱글)" : "(멀티)") +  "로 이동한다.(125레벨 이상)";
+            	text += "#l\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드"  + (single ? "(싱글)" : "(멀티)") +  "로 이동한다.(180레벨 이상)";
+            	//text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";
+            	int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalVellum" + (single ? "Single" : "Multi"));
+                text += "\r\n#L4#노멀 모드" + (single ? "(싱글)" : "(멀티)") + " 입장 횟수 증가" + ((single ? 2 : 1) - reset) + "회 가능 #l";
+        	}
+                
+            int v0 = self.askMenu(text);
+            if (target.getParty() == null) {
+                target.say("파티를 맺어야만 입장할 수 있는 것 같군. 파티를 찾아보자.");
+                return;
+            } else {
+            	if (v0 == 4 && !DBConfig.isGanglim) {
+            		if (getPlayer().getTogetherPoint() < 150) {
+            			self.sayOk("협동 포인트가 부족합니다. 현재 포인트 : " + getPlayer().getTogetherPoint());
+            			return;
+            		}
+            		boolean single = getPlayer().getPartyMemberSize() == 1;
+            		int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalVellum" + (single ? "Single" : "Multi"));
+            		if ((reset > 0 && !single) || reset > 1 && single) { //초기화 불가능
+                    	self.sayOk("일일 추가입장 횟수 증가를 모두 사용하였습니다.");
+                    	return;
+                    }
+            		getPlayer().gainTogetherPoint(-150);
+            		getPlayer().updateOneInfo(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalVellum" + (single ? "Single" : "Multi"), String.valueOf(reset + 1));
+            		self.sayOk("입장 횟수가 증가되었습니다.");
+            		return;
+            	}
+                if (target.getParty().isPartySameMap()) {
+                    if (v0 == 0) { //노말모드
+                        if (em.getProperty("status0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.Vellum.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.Vellum.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("status0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.Vellum.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.Vellum.getQuestID());
+                                        }
+                                        if (!DBConfig.isGanglim && getPlayer().getPartyMemberSize() > 1) {
+                                            for (MapleCharacter partyMember : getPlayer().getPartyMembers()) {
+                                            	if (partyMember.getMapId() == getPlayer().getMapId()) {
+                                               		partyMember.setMultiMode(true);
+                                               		partyMember.applyBMCurseJinMulti();
+                                              	}
+                                            }
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200400);
+                                        eim.setProperty("mode", "normal");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200400).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200400).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200410).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200400).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                target.say("파티원 중 #b#e" + overLap + "#n#k님은 오늘 이미 도전하여 도전할 수 없습니다.");
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 1) { //카오스모드
+                        if (em.getProperty("Cstatus0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.ChaosVellum.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.ChaosVellum.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("Cstatus0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.ChaosVellum.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.ChaosVellum.getQuestID());
+                                        }
+                                        if (!DBConfig.isGanglim && getPlayer().getPartyMemberSize() > 1) {
+                                            for (MapleCharacter partyMember : getPlayer().getPartyMembers()) {
+                                            	if (partyMember.getMapId() == getPlayer().getMapId()) {
+                                               		partyMember.setMultiMode(true);
+                                               		partyMember.applyBMCurseJinMulti();
+                                              	}
+                                            }
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200800);
+                                        eim.setProperty("mode", "chaos");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200800).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200800).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200810).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200800).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                if (DBConfig.isGanglim) {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 금일에 이미 도전하여 도전할 수 없습니다.");
+                                } else {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 이번주에 이미 도전하여 도전할 수 없습니다.");
+                                }
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 2) { //연습모드
+                        self.say("연습모드는 현재 준비중입니다.");
+                    }
+                } else {
+                    self.say("파티원 모두 같은맵에 있으셔야 합니다.");
+                }
+            }
+        }
+    }
+
+    public void bellumEnter() { //벨룸
+    	if (!DBConfig.isGanglim) {
+    		rootaforthDoor();
+    		return;
+    	}
+        EventManager em = getEventManager("RootAbyssVellum");
+        if (em == null) {
+            self.say("지금은 이용하실 수 없습니다.");
+        } else {
+            String text = "#r#e<루타비스 북쪽 정원 입구>#n#k\r\n루타비스 북쪽 봉인의 수호자인 #r벨룸#k이 지키고 있는 정원으로 가는 문이다. " + (DBConfig.isGanglim ? "클리어 기록은 당일 자정에 초기화 됩니다." : "#r클리어 기록은 노멀의 경우 당일 자정, 카오스의 경우 매주 목요일 자정을 기준으로 초기화 됩니다.#b") + "\r\n";
+            text += "#L0##i4033611##t4033611#를 사용하여 노멀 모드로 이동한다.(125레벨 이상)";
+            if (DBConfig.isGanglim) {
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.Vellum.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#k";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[노말 벨룸] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.Vellum.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            }
+            text += "#l\r\n#L1##i4033611##t4033611#를 사용하여 카오스 모드로 이동한다.(180레벨 이상)";
+            if (DBConfig.isGanglim) {
+                text += " #r[" + getPlayer().getOneInfoQuestInteger(QuestExConstants.ChaosVellum.getQuestID(), "eNum") + "/" + (getPlayer().getBossTier() + 1) + "]#b";
+                getPlayer().getPartyMembers().forEach(chr -> chr.dropMessage(5, "[카오스 벨룸] 오늘 해당 보스를 "+chr.getOneInfoQuestInteger(QuestExConstants.ChaosVellum.getQuestID(), "eNum")+"번 입장 하셨습니다. 총 "+(chr.getBossTier() + 1)+"번 입장 하실 수있습니다."));
+            }
+            text += "#l\r\n#L3#카오스 연습 모드로 이동한다.(180레벨 이상)#l";
+            int v0 = self.askMenu(text);
+            if (target.getParty() == null) {
+                target.say("파티를 맺어야만 입장할 수 있는 것 같군. 파티를 찾아보자.");
+            } else {
+                if (target.getParty().isPartySameMap()) {
+                    if (v0 == 0) { //노말모드
+                        if (em.getProperty("status0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.Vellum.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.Vellum.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("status0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.Vellum.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.Vellum.getQuestID());
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200400);
+                                        eim.setProperty("mode", "normal");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200400).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200400).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200410).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200400).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                target.say("파티원 중 #b#e" + overLap + "#n#k님은 오늘 이미 도전하여 도전할 수 없습니다.");
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 1) { //카오스모드
+                        if (em.getProperty("Cstatus0").equals("0")) {
+                            String overLap = checkEventNumber(getPlayer(), QuestExConstants.ChaosVellum.getQuestID(), DBConfig.isGanglim);
+                            if (overLap == null) {
+                                String lastDate = checkEventLastDate(getPlayer(), QuestExConstants.ChaosVellum.getQuestID());
+                                if (lastDate == null || DBConfig.isGanglim) {
+                                    String exMember = target.exchangeParty(4033611, -1);
+                                    if (exMember == null) { //입장시도
+                                        em.setProperty("Cstatus0", "1");
+                                        updateLastDate(getPlayer(), QuestExConstants.ChaosVellum.getQuestID());
+                                        if (DBConfig.isGanglim) {
+                                            updateQuestEx(getPlayer(), QuestExConstants.ChaosVellum.getQuestID());
+                                        }
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 105200800);
+                                        eim.setProperty("mode", "chaos");
+                                        getClient().getChannelServer().getMapFactory().getMap(105200800).setLastRespawnTime(0);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200800).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200810).resetFully(true);
+                                        getClient().getChannelServer().getMapFactory().getMap(105200800).setLastRespawnTime(Long.MAX_VALUE);
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        target.say("파티원 중 #b" + exMember + "#k님은 #i4033611##t4033611#을 가지고 있지 않아 입장이 불가능하군.");
+                                    }
+                                } else {
+                                    target.say("파티원 중 #b#e" + lastDate + " #n#k뒤 재 입장 가능합니다.");
+                                }
+                            } else {
+                                if (DBConfig.isGanglim) {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 금일에 이미 도전하여 도전할 수 없습니다.");
+                                } else {
+                                    target.say("파티원 중 #b#e" + overLap + "#n#k님은 이번주에 이미 도전하여 도전할 수 없습니다.");
+                                }
+                            }
+                        } else {
+                            self.say("이미 모든 인스턴스가 가득차 이용하실 수 없습니다. 다른 채널을 이용해 주세요.");
+                        }
+                    } else if (v0 == 2) { //연습모드
+                        self.say("연습모드는 현재 준비중입니다.");
+                    }
+                } else {
+                    self.say("파티원 모두 같은맵에 있으셔야 합니다.");
+                }
+            }
+        }
+    }
+
+    public void abysscave_ent() {
+        EventInstanceManager eim = getEventInstance();
+        if (eim != null) {
+            if (eim.getProperty("summonMOB") == null) {
+                eim.setProperty("summonMOB", "1");
+                Field field = getPlayer().getMap();
+                field.startMapEffect("벨룸이 보이지 않는다. 제단 근처를 조사해보자.", 5120025, 3000);
+            }
+        }
+    }
+
+    public void rootabyssOut() {
+        initNPC(MapleLifeFactory.getNPC(1064012));
+        if (target.askYesNo("이미 열쇠를 써버렸다. 소모된 열쇠가 아까우니 이대로 나가는 것보다 보스를 처치하는 것이 더 좋을 것 같은데.. 그래도 그냥 나갈까?") == 1) {
+            if (getPlayer().getEventInstance() != null) {
+                getPlayer().setRegisterTransferFieldTime(0);
+                getPlayer().setRegisterTransferField(0);
+            }
+            registerTransferField(105200000);
+        } else {
+            target.sayOk("기왕 열쇠를 사용하고 들어왔는데 보스까지 클리어하도록 하자.");
+        }
+    }
+
+    public void outrootaBoss() {
+        initNPC(MapleLifeFactory.getNPC(1064012));
+        if (target.askYesNo("전투를 마치고 밖으로 나갈까??") == 1) {
+            if (getPlayer().getEventInstance() != null) {
+                getPlayer().setRegisterTransferFieldTime(0);
+                getPlayer().setRegisterTransferField(0);
+            }
+            registerTransferField(105200000);
+        }
+    }
+
+    public void rootaBossOut() {
+        initNPC(MapleLifeFactory.getNPC(1064012));
+        if (target.askYesNo("전투를 마치고 밖으로 나갈까??") == 1) {
+            if (getPlayer().getEventInstance() != null) {
+                getPlayer().setRegisterTransferFieldTime(0);
+                getPlayer().setRegisterTransferField(0);
+            }
+            registerTransferField(105200000);
+        }
+    }
+
+    public void rootaNext() {
+        initNPC(MapleLifeFactory.getNPC(1064012));
+        EventInstanceManager eim = getEventInstance();
+        if (eim != null) {
+            if (getPlayer().getMap().getAllMonster().size() == 0) {
+                if (target.askYesNo("그럼 이동해볼까?") == 1) {
+                    if (eim.getProperty("stage1") == null) {
+                        eim.setProperty("stage1", "clear");
+                        target.getParty().registerTransferField(target.getMapId() + 10);
+                    }
+                } else {
+                    target.sayOk("조금 더 준비를 하고 이동하자.");
+                }
+            } else {
+                getPlayer().getMap().broadcastMessage(CWvsContext.getScriptProgressMessage("먼저 정원 내의 임프를 제거하세요."));
+                getPlayer().getMap().broadcastMessage(CWvsContext.serverNotice(5, "먼저 정원 내의 임프를 제거하세요."));
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+9001212 = {
+	0 = {
+		ItemID = 2190000
+		Quantity = 1
+		Price = 10000
+		Position = 0
+		ReqItem = 0
+		ReqItemQ = 0
+		Category = 0
+		MinLevel = 0
+		Expiration = 0
+		PointQuestExID = 0
+		PointPrice = 0
+		BuyLimit = 0
+		WorldBuyLimit = 0
+		LimitQuestExID = 0
+		LimitQuestExKey = 
+		LimitQuestExValue = 0
+	}
+}

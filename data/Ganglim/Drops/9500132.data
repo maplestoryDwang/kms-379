@@ -1,0 +1,10 @@
+9500132 = {
+	0 = {
+		ItemID = 2437121
+		Chance = 5
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

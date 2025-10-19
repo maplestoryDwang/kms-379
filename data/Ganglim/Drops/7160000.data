@@ -1,0 +1,10 @@
+7160000 = {
+	0 = {
+		ItemID = 4000133
+		Chance = 200000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

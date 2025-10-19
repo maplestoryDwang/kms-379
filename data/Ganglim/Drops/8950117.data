@@ -1,0 +1,154 @@
+8950117 = {
+	1 = {
+		ItemID = 4310308
+		Chance = 1000000
+		QuestID = 0
+		Min = 48
+		Max = 58
+		Individual = 0
+	}
+	2 = {
+		ItemID = 1113306
+		Chance = 1000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	3 = {
+		ItemID = 4310237
+		Chance = 1000000
+		QuestID = 0
+		Min = 20
+		Max = 40
+		Individual = 0
+	}
+	4 = {
+		ItemID = 4310237
+		Chance = 1000000
+		QuestID = 0
+		Min = 20
+		Max = 40
+		Individual = 0
+	}
+	5 = {
+		ItemID = 4310237
+		Chance = 1000000
+		QuestID = 0
+		Min = 20
+		Max = 40
+		Individual = 0
+	}
+	6 = {
+		ItemID = 4310237
+		Chance = 1000000
+		QuestID = 0
+		Min = 20
+		Max = 40
+		Individual = 0
+	}
+	7 = {
+		ItemID = 4310266
+		Chance = 1000000
+		QuestID = 0
+		Min = 5
+		Max = 15
+		Individual = 0
+	}
+	8 = {
+		ItemID = 4310266
+		Chance = 1000000
+		QuestID = 0
+		Min = 5
+		Max = 15
+		Individual = 0
+	}
+	10 = {
+		ItemID = 4031227
+		Chance = 1000000
+		QuestID = 0
+		Min = 6
+		Max = 12
+		Individual = 0
+	}
+    12 = {
+		ItemID = 2636421
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	13 = {
+		ItemID = 2636421
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	14 = {
+		ItemID = 2636421
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	15 = {
+		ItemID = 2636421
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	16 = {
+		ItemID = 2636421
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	17 = {
+		ItemID = 2636421
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	18 = {
+		ItemID = 2636421
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	19 = {
+		ItemID = 2636421
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+    20 = {
+		ItemID = 2636421
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	21 = {
+		ItemID = 2636421
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

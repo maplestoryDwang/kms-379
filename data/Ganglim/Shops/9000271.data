@@ -1,0 +1,20 @@
+9000271 = {
+	0 = {
+		ItemID = 4001715
+		Quantity = 1
+		Price = 0
+		Position = 0
+		ReqItem = 4310291
+		ReqItemQ = 100
+		Category = 1
+		MinLevel = 0
+		Expiration = 0
+		PointQuestExID = 0
+		PointPrice = 0
+		BuyLimit = 0
+		WorldBuyLimit = 0
+		LimitQuestExID = 0
+		LimitQuestExKey = 
+		LimitQuestExValue = 0
+	}
+}

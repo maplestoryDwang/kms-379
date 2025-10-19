@@ -1,0 +1,22 @@
+# AutoNotice 자동 공지사항 서버 처리 부분 데이터
+
+# 아래 데이터중 무작위 선택 후 출력됩니다.
+0 = {
+	Type = 6
+	Interval = 600000
+	0 = {
+		Notice = 강림
+	}
+	1 = {
+		Notice = 강림
+	}
+	2 = {
+		Notice = 강림
+	}
+	3 = {
+		Notice = 강림
+	}
+	4 = {
+		Notice = 강림
+	}
+}

@@ -1,0 +1,130 @@
+﻿0 = {
+	bgmPath = BgmROYAL.img/191
+	musicName = [오로라의 정원] Flower Place - 191
+}
+1 = {
+	bgmPath = BgmROYAL.img/197
+	musicName = [이벤트] Shining Star(10th) - 197
+}
+2 = {
+	bgmPath = BgmROYAL.img/223
+	musicName = [아이스크림 정원] Chocolate kingdom - 223
+}
+3 = {
+	bgmPath = BgmROYAL.img/230
+	musicName = [이벤트] The Ocean - 230
+}
+4 = {
+	bgmPath = BgmROYAL.img/239
+	musicName = [얼어붙은 세계] Frozen - 239
+}
+5 = {
+	bgmPath = BgmROYAL.img/257
+	musicName = [전사들의 쉼터] Rest - 257
+}
+6 = {
+	bgmPath = BgmROYAL.img/265
+	musicName = [벨로스] Belos (Piano.ver) - 265
+}
+7 = {
+	bgmPath = BgmROYAL.img/279
+	musicName = [이벤트] 칵테일 - 279
+}
+8 = {
+	bgmPath = BgmROYAL.img/298
+	musicName = [프리링 정원] 바람의향기(Scent of the Wind) - 298
+}
+9 = {
+	bgmPath = BgmROYAL.img/336
+	musicName = [인형의 집] 인형의집 - 336
+}
+
+
+100 = {
+	bgmPath = BgmROYAL2.img/Reminiscence
+	musicName = [테일즈위버] Reminiscence
+}
+101 = {
+	bgmPath = BgmROYAL2.img/SiaLogin(StarGuardian)
+	musicName = [메이플스토리M] 시아 로그인 (Star Guardian)
+}
+102 = {
+	bgmPath = BgmROYAL2.img/LittleStarsHappyDelusion
+	musicName = [메이플스토리M] Little Stars Happy Delusion
+}
+103 = {
+	bgmPath = BgmROYAL2.img/FriendBecameAStar
+	musicName = [메이플스토리M] Friend Became A Star
+}
+104 = {
+	bgmPath = BgmUI.img/zeniatown1
+	musicName = [로얄] 이전 광장 브금 1번
+}
+105 = {
+	bgmPath = BgmUI.img/zeniatown2
+	musicName = [로얄] 이전 광장 브금 2번
+}
+106 = {
+	bgmPath = BgmUI.img/zeniatown3
+	musicName = [로얄] 이전 광장 브금 3번
+}
+107 = {
+	bgmPath = BgmUI.img/zeniatown4
+	musicName = [로얄] 이전 광장 브금 4번
+}
+108 = {
+	bgmPath = BgmUI.img/zeniatown5
+	musicName = [로얄] 이전 광장 브금 5번
+}
+109 = {
+	bgmPath = BgmUI.img/zeniatown6
+	musicName = [로얄] 이전 광장 브금 6번
+}
+110 = {
+	bgmPath = BgmUI.img/zenia1
+	musicName = [로얄] 이전 코디 맵 브금 1번
+}
+111 = {
+	bgmPath = BgmUI.img/zenia2
+	musicName = [로얄] 이전 코디 맵 브금 2번
+}
+112 = {
+	bgmPath = BgmUI.img/zenia3
+	musicName = [로얄] 이전 코디 맵 브금 3번
+}
+113 = {
+	bgmPath = BgmUI.img/zenia4
+	musicName = [로얄] 이전 코디 맵 브금 4번
+}
+114 = {
+	bgmPath = Bgm42.img/Catch Your Dreams! full
+	musicName = [메이플스토리] Catch Your Dreams!
+}
+115 = {
+	bgmPath = Bgm41.img/PromiseOfHeaven
+	musicName = [메이플스토리] Promise Of Heaven
+}
+116 = {
+	bgmPath = BgmEvent3.img/MashUp_Dance1
+	musicName = [메이플스토리] MashUp_Dance1
+}
+117 = {
+	bgmPath = BgmEvent3.img/MashUp_Dance2
+	musicName = [메이플스토리] MashUp_Dance2
+}
+118 = {
+	bgmPath = Bgm27.img/AngelsRoom
+	musicName = [메이플스토리] AngelsRoom
+}
+119 = {
+	bgmPath = Bgm30.img/5thSpotLightFlyAway
+	musicName = [메이플스토리] 5thSpotLightFlyAway
+}
+120 = {
+	bgmPath = Bgm30.img/6thGrandFinaleStarBubble
+	musicName = [메이플스토리] 6thGrandFinaleStarBubble
+}
+121 = {
+	bgmPath = BgmEvent2.img/risingStar2
+	musicName = [메이플스토리] risingStar
+}

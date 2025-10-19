@@ -1,0 +1,223 @@
+package script.Boss;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import constants.QuestExConstants;
+import database.DBConfig;
+import objects.fields.fieldset.FieldSet;
+import objects.item.MapleInventoryType;
+import objects.quest.MapleQuest;
+import objects.quest.MapleQuestStatus;
+import objects.users.MapleCharacter;
+import scripting.newscripting.ScriptEngineNPC;
+
+public class Zakum extends ScriptEngineNPC {
+
+    public void zakum_accept() {
+        FieldSet fieldSet = fieldSet("ZakumEnter");
+        if (fieldSet == null) {
+            self.sayOk("지금은 자쿰 레이드를 이용하실 수 없습니다.");
+            return;
+        }
+        int v0 = -1;
+        if (DBConfig.isGanglim) {
+        	if (target.getMapId() == 211042401) {
+                fieldSet = fieldSet("ChaosZakumEnter");
+                v0 = self.askMenu("#e<자쿰 : 카오스모드>#n\r\n자쿰이 부활했다네. 이대로 둔다면 화산폭발을 일으켜서 엘나스 산맥 전체를 지옥으로 만들어 버릴거야.\r\n#b#e(파티원이 동시에 이동됩니다.)#n#k\r\n#r(카오스 자쿰은 #e1주일에 1회 클리어#n할 수 있으며, 클리어 기록은 #e매주 목요일에 초기화#n 됩니다.)\r\n#b\r\n#L0# 카오스 자쿰 입장을 신청한다.#l");
+            } else {
+                v0 = self.askMenu("#e<자쿰 : 노멀모드>#n\r\n자쿰이 부활했다네. 이대로 둔다면 화산폭발을 일으켜서 엘나스 산맥 전체를 지옥으로 만들어 버릴거야.\r\n#r(이지, 노멀 자쿰의 제단에는 두 모드 합쳐 #e하루에 1회 입장#n할 수 있으며, 입장 기록은 #e매일 자정에 초기화#n 됩니다.)\r\n#b\r\n#L0# 자쿰 입장을 신청한다.(파티원이 동시에 이동됩니다.)#l");
+            }
+        }
+        else { //진서버 
+        	if (target.getMapId() == 211042401) {
+                fieldSet = fieldSet("ChaosZakumEnter");
+                boolean isSingle = false;
+            	if (getPlayer().getParty() == null || //파티가 없거나
+    				getPlayer().getParty() != null && getPlayer().getParty().getMembers().size() == 1) { //파티원이 1명인경우
+    				isSingle = true;
+    			}
+                String askString = "#e<자쿰 : 카오스모드>#n\r\n"
+                		+ "자쿰이 부활했다네. 이대로 둔다면 화산폭발을 일으켜서 엘나스 산맥 전체를 지옥으로 만들어 버릴거야.\r\n"
+                		+ "#b#e(파티원이 동시에 이동됩니다.)#n#k\r\n"
+                		+ "#r(카오스 자쿰은 #e1주일에 1회 클리어#n할 수 있으며, 클리어 기록은 #e매주 목요일에 초기화#n 됩니다.)\r\n";
+                if (!isSingle) { //멀티모드
+					askString += "멀티모드 에서는 보스의 체력이 3배 증가하며, \r\n"
+						+ "최종 데미지가 50% 감소,\r\n"
+						+ "파티원의 데스카운트가 공유됩니다.";
+				}
+                askString += "#b\r\n";
+                if (isSingle) {
+					askString += "#L0# 카오스 자쿰 입장을 신청한다.(싱글모드)#l\r\n";
+				}
+				else {
+					askString += "#L0# 카오스 자쿰 입장을 신청한다.(멀티모드)#l\r\n";
+				}
+                boolean canReset = false;
+				int reset = 0;
+				if (isSingle) {
+					reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.WeeklyQuestResetCount.getQuestID(), "ChaosZakumSingle");
+					int count = getPlayer().getOneInfoQuestInteger(15166, "mobDeadSingle");
+					if (count > 0) canReset = true;
+				}
+				else {
+					reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.WeeklyQuestResetCount.getQuestID(), "ChaosZakumMulti");
+					int count = getPlayer().getOneInfoQuestInteger(15166, "mobDeadMulti");
+					if (count > 0) canReset = true;
+				}
+				if (canReset) {
+					askString += " #L1#입장횟수 초기화 " + (1 - reset) + "회 추가입장 가능";
+				}
+                v0 = self.askMenu(askString);
+            } else {
+            	boolean isSingle = false;
+            	if (getPlayer().getParty() == null || //파티가 없거나
+    				getPlayer().getParty() != null && getPlayer().getParty().getMembers().size() == 1) { //파티원이 1명인경우
+    				isSingle = true;
+    			}
+				String askString = "#e<자쿰 : 노멀모드>#n\r\n"
+						+ "자쿰이 부활했다네. 이대로 둔다면 화산폭발을 일으켜서 엘나스 산맥 전체를 지옥으로 만들어 버릴거야.\r\n"
+						+ "#r(이지, 노멀 자쿰의 제단에는 두 모드 합쳐 #e하루에 1회 입장#n"
+						+ "할 수 있으며, 입장 기록은 #e매일 자정에 초기화#n 됩니다.)\r\n";
+				if (!isSingle) { //멀티모드
+					askString += "멀티모드 에서는 보스의 체력이 3배 증가하며, \r\n"
+						+ "최종 데미지가 50% 감소,\r\n"
+						+ "파티원의 데스카운트가 공유됩니다.";
+				}
+				askString += "#b\r\n";
+				if (isSingle) {
+					askString += "#L0# 자쿰 입장을 신청한다.(싱글모드)#l\r\n";
+				}
+				else {
+					askString += "#L0# 자쿰 입장을 신청한다.(멀티모드)#l\r\n";
+				}
+				boolean canReset = false;
+				int reset = 0;
+				if (isSingle) {
+					reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalZakumSingle");
+					int count = getPlayer().getOneInfoQuestInteger(7003, "Single");
+					if (count > 0) canReset = true;
+				}
+				else {
+					reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalZakumMulti");
+					int count = getPlayer().getOneInfoQuestInteger(7003, "Multi");
+					if (count > 1) canReset = true;
+				}
+					
+				if (canReset) {
+					if (isSingle) {
+						askString += " #L1#입장횟수 초기화 " + (2 - reset) + "회 추가입장 가능";
+					}
+					else {
+						askString += " #L1#입장횟수 초기화 " + (1 - reset) + "회 추가입장 가능";
+					}
+				}
+                v0 = self.askMenu(askString);
+            }
+        }
+
+        if (v0 == 0) { //입장시도
+            if (getPlayer().getItemQuantity(4001017, false) < 1) {
+                if (getPlayer().getInventory(MapleInventoryType.ETC).getNumFreeSlot() < 1) {
+                    self.say("기타 인벤토리 공간이 부족한것 같은걸? 기타 인벤토리 공간을 충분히 확보해주게나.");
+                    return;
+                }
+                target.exchange(4001017, 1);
+                self.say("불의 눈이 없어보이는군. 자쿰을 만나기 위해서 꼭 필요하다네. 내가 갖고 있던 것을 드릴테니, 자쿰을 꼭 처치해주길 바라네.");
+            }
+            int enter = fieldSet.enter(target.getId(), 0);
+            if (enter == -1) self.say("알 수 없는 이유로 입장할 수 없습니다. 잠시 후에 다시 시도해 주십시오.");
+            else if (enter == 1) self.say("파티를 맺어야만 도전할 수 있습니다.");
+            else if (enter == 2) self.say("파티장을 통해 진행해 주십시오.");
+            else if (enter == 3) self.say( "최소 " + fieldSet.minMember + "인 이상의 파티가 퀘스트를 시작할 수 있습니다.");
+            else if (enter == 4) self.say( "파티원의 레벨은 최소 " + fieldSet.minLv + " 이상이어야 합니다.");
+            else if (enter == 5) self.say("파티원이 모두 모여 있어야 시작할 수 있습니다.");
+            else if (enter == 6) self.say( "이미 다른 원정대가 안으로 들어가 퀘스트 클리어에 도전하고 있는 중입니다.");
+            else if (enter == 7) { //30분 대기시간이 발생한경우 (카오스 자쿰만 해당된다.
+                self.say("30분 이내에 입장한 파티원이 있습니다. 입장 후 30분 이내에 재입장이 불가능합니다.");
+            }
+            else if (enter < -1) {
+                MapleCharacter user = getClient().getChannelServer().getPlayerStorage().getCharacterById(enter * -1);
+                String name = "";
+                if (user != null) {
+                    name = user.getName();
+                }
+                if (target.getMapId() == 211042401) {
+                    self.sayOk("최근 일주일 이내 <보스:자쿰> 카오스 모드를 클리어한 파티원이 있습니다. <보스:자쿰> 카오스 모드는 일주일에 1회만 클리어 가능합니다.\r\n#r#e<클리어 기록은 매주 목요일에 일괄 초기화 됩니다.>");
+                } else {
+                    self.say("파티원 중 #b#e" + name + "#k#n 님이 오늘 자쿰의 제단에 입장하셔서 들어갈 수 없습니다.");
+                }
+            }
+        }
+        else if (v0 == 1) { //진 입장횟수 초기화
+        	if (!DBConfig.isGanglim) {
+        		int togetherPoint = getPlayer().getTogetherPoint();
+        		if (togetherPoint < 150) {
+        			self.sayOk("협동포인트가 부족합니다. 현재 협동포인트 : " + togetherPoint);
+        			return;
+        		}
+        		if (target.getMapId() == 211042401) {
+        			boolean isSingle = false;
+	            	if (getPlayer().getParty() == null || //파티가 없거나
+	    				getPlayer().getParty() != null && getPlayer().getParty().getMembers().size() == 1) { //파티원이 1명인경우
+	    				isSingle = true;
+	    			}
+	            	int resetCount = 0;
+	            	if (isSingle) {
+	            		resetCount = getPlayer().getOneInfoQuestInteger(QuestExConstants.WeeklyQuestResetCount.getQuestID(), "ChaosZakumSingle");
+	            		if (resetCount > 0) {
+							self.sayOk("이번주는 더이상 초기화가 불가능합니다.");
+							return;
+						}
+	            		getPlayer().updateOneInfo(15166, "mobDeadSingle", "0");
+	            		getPlayer().updateOneInfo(QuestExConstants.WeeklyQuestResetCount.getQuestID(), "ChaosZakumSingle", String.valueOf(resetCount + 1));
+	            	}
+	            	else {
+	            		resetCount = getPlayer().getOneInfoQuestInteger(QuestExConstants.WeeklyQuestResetCount.getQuestID(), "ChaosZakumMulti");
+	            		if (resetCount > 0) {
+							self.sayOk("이번주는 더이상 초기화가 불가능합니다.");
+							return;
+						}
+	            		getPlayer().updateOneInfo(15166, "mobDeadMulti", "0"); 
+						getPlayer().updateOneInfo(QuestExConstants.WeeklyQuestResetCount.getQuestID(), "ChaosZakumMulti", String.valueOf(resetCount + 1));
+	            	}
+					getPlayer().gainTogetherPoint(-150);
+					self.sayOk("카오스자쿰 입장횟수가 초기화되었습니다.");
+        		}
+				else {
+					boolean isSingle = false;
+	            	if (getPlayer().getParty() == null || //파티가 없거나
+	    				getPlayer().getParty() != null && getPlayer().getParty().getMembers().size() == 1) { //파티원이 1명인경우
+	    				isSingle = true;
+	    			}
+	            	int resetCount = 0;
+	            	if (isSingle) {
+	            		resetCount = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalZakumSingle");
+	            		if (resetCount > 1) {
+							self.sayOk("오늘은 더이상 초기화가 불가능합니다.");
+							return;
+						}
+	            	}
+	            	else {
+	            		resetCount = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalZakumMulti");
+	            		if (resetCount > 0) {
+							self.sayOk("오늘은 더이상 초기화가 불가능합니다.");
+							return;
+						}
+	            	}
+	            	if (isSingle) {
+	            		getPlayer().updateOneInfo(7003, "Single", "");
+	            		getPlayer().updateOneInfo(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalZakumSingle", String.valueOf(resetCount + 1));
+					}
+					else {
+						getPlayer().updateOneInfo(7003, "Multi", "1"); // 멀티는 1회추가입장으로 기본 1회로 내림
+						getPlayer().updateOneInfo(QuestExConstants.DailyQuestResetCount.getQuestID(), "NormalZakumMulti", String.valueOf(resetCount + 1));
+					}
+	            	getPlayer().gainTogetherPoint(-150);
+					self.sayOk("노말자쿰 입장횟수가 초기화되었습니다.");
+				}
+        	}
+        }
+    }
+}

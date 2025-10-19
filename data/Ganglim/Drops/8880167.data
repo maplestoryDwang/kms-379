@@ -1,0 +1,138 @@
+8880167 = {
+	0 = {
+		ItemID = 4001879
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	1 = {
+		ItemID = 2048717
+		Chance = 1000000
+		QuestID = 0
+		Min = 10
+		Max = 20
+		Individual = 0
+	}
+	2 = {
+		ItemID = 2711003
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 20
+		Individual = 0
+	}
+	3 = {
+		ItemID = 2711004
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 20
+		Individual = 0
+	}
+	4 = {
+		ItemID = 4310229
+		Chance = 1000000
+		QuestID = 0
+		Min = 25
+		Max = 80
+		Individual = 0
+	}
+	6 = {
+		ItemID = 2436039
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 3
+		Individual = 0
+	}
+	7 = {
+		ItemID = 4310308
+		Chance = 1000000
+		QuestID = 0
+		Min = 11
+		Max = 12
+		Individual = 0
+	}
+	8 = {
+		ItemID = 4310237
+		Chance = 1000000
+		QuestID = 0
+		Min = 10
+		Max = 20
+		Individual = 0
+	}
+	9 = {
+		ItemID = 4310237
+		Chance = 1000000
+		QuestID = 0
+		Min = 10
+		Max = 20
+		Individual = 0
+	}
+	10 = {
+		ItemID = 4310237
+		Chance = 1000000
+		QuestID = 0
+		Min = 10
+		Max = 20
+		Individual = 0
+	}
+	11 = {
+		ItemID = 4310237
+		Chance = 1000000
+		QuestID = 0
+		Min = 10
+		Max = 20
+		Individual = 0
+	}
+	12 = {
+		ItemID = 4310266
+		Chance = 1000000
+		QuestID = 0
+		Min = 6
+		Max = 10
+		Individual = 0
+	}
+	13 = {
+		ItemID = 4310266
+		Chance = 1000000
+		QuestID = 0
+		Min = 6
+		Max = 10
+		Individual = 0
+	}
+	18 = {
+		ItemID = 2636420
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	19 = {
+		ItemID = 2636420
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	20 = {
+		ItemID = 2636420
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	21 = {
+		ItemID = 2636420
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

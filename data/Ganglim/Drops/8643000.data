@@ -1,0 +1,50 @@
+8643000 = {
+	0 = {
+		ItemID = 4001832
+		Chance = 800
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	1 = {
+		ItemID = 4021031
+		Chance = 500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	2 = {
+		ItemID = 4310229
+		Chance = 5200
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	3 = {
+		ItemID = 2431174
+		Chance = 4000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	4 = {
+		ItemID = 2435719
+		Chance = 800
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	5 = {
+		ItemID = 4001878
+		Chance = 2000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

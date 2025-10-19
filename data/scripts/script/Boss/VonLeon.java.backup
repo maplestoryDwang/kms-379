@@ -1,0 +1,361 @@
+package script.Boss;
+
+import constants.GameConstants;
+import constants.QuestExConstants;
+import database.DBConfig;
+import network.models.CField;
+import objects.context.party.Party;
+import objects.context.party.PartyMemberEntry;
+import objects.fields.Field;
+import objects.fields.gameobject.lifes.ChangeableStats;
+import objects.fields.gameobject.lifes.MapleLifeFactory;
+import objects.fields.gameobject.lifes.MapleMonster;
+import objects.item.Item;
+import objects.item.MapleInventory;
+import objects.item.MapleInventoryType;
+import objects.item.MapleItemInformationProvider;
+import objects.users.MapleCharacter;
+import scripting.EventInstanceManager;
+import scripting.EventManager;
+import scripting.ScriptMessageFlag;
+import scripting.newscripting.ScriptEngineNPC;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class VonLeon extends ScriptEngineNPC {
+
+    public void portalNPC() {
+        initNPC(MapleLifeFactory.getNPC(2161005)); //포탈스크립트 엔피시
+        EventManager em = getEventManager("VonLeon");
+        if (em == null) {
+            self.say("지금은 반 레온 레이드를 이용하실 수 없습니다.");
+        } else {
+            if (target.getMapId() == 211070000) { //입장맵(알현실 앞 복도)
+                if (target.getParty() == null) {
+                    self.say("1인 이상 파티를 맺어야만 입장할 수 있습니다.");
+                } else {
+                    if (target.getParty().getLeader().getId() != target.getId() && DBConfig.isGanglim) {
+                        self.say("파티장을 통해 진행해 주십시오.");
+                    } else {
+                    	boolean single = getPlayer().getPartyMemberSize() == 1;
+                        int v0 = self.askMenu("#e<보스: 반 레온>#n\r\n위대한 용사여. 타락한 사자왕에게 맞설 준비를 마치셨습니까?\r\n#b\r\n#L0# 반 레온 원정대 입장을 신청한다.#l");
+                        if (v0 == 0) {
+                        	String menu = "";
+                        	if (DBConfig.isGanglim) {
+                        		menu = "#e<보스: 반 레온>#n\r\n원하시는 모드를 선택해주세요.\r\n\r\n"
+                            			+ "#L0# 이지 모드 ( 레벨 125 이상 )#l\r\n"
+                            			+ "#L1# 노멀 모드 ( 레벨 125 이상 )#l\r\n"
+                            			+ "#L2# 하드 모드 ( 레벨 125 이상 )#l";
+                        	}
+                        	else {
+                        		menu = "#e<보스: 반 레온>#n\r\n원하시는 모드를 선택해주세요.\r\n\r\n"
+                            			+ "#L0# 이지 모드 " + (single ? "(싱글)" : "(멀티)") + " ( 레벨 125 이상 )#l\r\n"
+                            			+ "#L1# 노멀 모드 " + (single ? "(싱글)" : "(멀티)") + " ( 레벨 125 이상 )#l\r\n"
+                            			+ "#L2# 하드 모드 " + (single ? "(싱글)" : "(멀티)") + " ( 레벨 125 이상 )#l\r\n";
+                        		int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "VonLeon" + (single ? "Single" : "Multi"));
+                        		menu += "#L3# 입장횟수" + (single ? "(싱글)" : "(멀티)") + " 증가 " + ((single ? 2 : 1) - reset) + "회 증가 가능";
+                        	}
+                            int v1 = self.askMenu(menu);
+                            if (v1 == 3 && !DBConfig.isGanglim) {
+                            	if (getPlayer().getTogetherPoint() < 150) {
+                            		self.sayOk("협동 포인트가 부족합니다. 현재 포인트 : " + getPlayer().getTogetherPoint());
+                            		return;
+                            	}
+                            	int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.DailyQuestResetCount.getQuestID(), "VonLeon" + (single ? "Single" : "Multi"));
+                            	if ((reset > 0 && !single) || (reset > 1 && single)) {
+                            		self.sayOk("금일 추가 가능한 횟수를 모두 사용하였습니다.");
+                            		return;
+                            	}
+                            	getPlayer().gainTogetherPoint(-150);
+                            	getPlayer().updateOneInfo(QuestExConstants.DailyQuestResetCount.getQuestID(), "VonLeon" + (single ? "Single" : "Multi"), String.valueOf(reset + 1));
+                            	self.sayOk("입장 가능 횟수가 증가하였습니다.");
+                            	return;
+                            }
+                            if (!DBConfig.isGanglim) {
+                            	if (target.getParty().getLeader().getId() != target.getId()) {
+                            		self.say("파티장을 통해 진행해 주십시오.");
+                            		return;
+                            	}
+                            }
+                            if (target.getParty().isPartySameMap()) {
+                                boolean canEnter = false;
+                                String overLap = null;
+                                if (!DBConfig.isGanglim) {
+                                    overLap = checkEventNumber(getPlayer(), QuestExConstants.VonLeon.getQuestID());
+                                }
+                                if (overLap == null) {
+                                    if (em.getProperty("status0").equals("0")) {
+                                        canEnter = true;
+                                    }
+
+                                    int v2 = -1;
+                                    if (v1 == 2) {
+                                        if (getPlayer().getQuestStatus(2000019) == 1) {
+                                            if (GameConstants.isZero(getPlayer().getJob())) {
+                                                v2 = self.askMenu("#e<제네시스 무기>#n\r\n검은 마법사의 힘이 담긴 #b제네시스 무기#k의 비밀을 풀기 위한 임무를 수행 할 수 있다. 어떻게 할까?\r\n\r\n#e#r<임무 수행 조건>#n#k\r\n#b -혼자서 격파\r\n -최종 데미지 90% 감소\r\n -착용 중인 장비의 순수 능력치만 적용\r\n#k#L0#미션을 수행한다.#l\r\n#L1#미션을 수행하지 않는다.#l", ScriptMessageFlag.Self);
+                                            } else {
+                                                v2 = self.askMenu("#e<제네시스 무기>#n\r\n검은 마법사의 힘이 담긴 #b제네시스 무기#k의 비밀을 풀기 위한 임무를 수행 할 수 있다. 어떻게 할까?\r\n\r\n#e#r<임무 수행 조건>#n#k\r\n#b -혼자서 격파\r\n -봉인된 제네시스 무기와 보조무기만 장착\r\n -최종 데미지 90% 감소\r\n -착용 중인 장비의 순수 능력치만 적용\r\n#k#L0#미션을 수행한다.#l\r\n#L1#미션을 수행하지 않는다.#l", ScriptMessageFlag.Self);
+                                            }
+                                            if (v2 == 0) {
+                                                if (!checkBMQuestEquip()) {
+                                                    return;
+                                                }
+                                                if (getPlayer().getParty().getPartyMemberList().size() > 1) {
+                                                    self.say("해당 퀘스트는 혼자 진행해야 한다.", ScriptMessageFlag.Self);
+                                                    return;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+									if (!canEnter) { // 입장이 불가능한 경우 맵에 유저가 없는지 체크 후 인스턴스 초기화
+										if (getClient().getChannelServer().getMapFactory().getMap(211070100).getCharactersSize() == 0) {
+											String rt = em.getProperty("ResetTime");
+											long curTime = System.currentTimeMillis();
+											long time = rt == null ? 0 : Long.parseLong(rt);
+											if (time == 0) {
+												em.setProperty("ResetTime", String.valueOf(curTime));
+											} else if (time - curTime >= 10000) { // 10초이상 맵이 빈경우 입장가능하게 변경
+												canEnter = true;
+												em.setProperty("ResetTime", "0");
+											}
+										}
+									}
+                                    
+                                    if (canEnter) {
+                                        if (DBConfig.isGanglim) {
+                                            Party party = getPlayer().getParty();
+                                            for (PartyMemberEntry mpc : party.getPartyMemberList()) {
+                                                MapleCharacter p = getPlayer().getMap().getCharacterById(mpc.getId());
+                                                int key = 1234569 + v1;
+                                                if (p != null) {
+                                                    int count = p.getOneInfoQuestInteger(key, "vonleon_clear");
+                                                    if (count >= (1 + p.getBossTier())) {
+                                                        self.say("파티원 중 #b#e" + p.getName() + "#n#k가 오늘 더 이상 도전할 수 없습니다.");
+                                                        return;
+                                                    }
+                                                    p.updateOneInfo(key, "vonleon_clear", String.valueOf(count + 1));
+                                                }
+                                            }
+                                        }
+
+                                        em.setProperty("status0", "1");
+                                        EventInstanceManager eim = em.readyInstance();
+                                        eim.setProperty("map", 211070100);
+                                        if (v1 == 0) {
+                                            eim.setProperty("mode", "easy");
+                                        } else if (v1 == 1) {
+                                            eim.setProperty("mode", "normal");
+                                        } else if (v1 == 2) {
+                                            eim.setProperty("mode", "hard");
+                                        }
+                                        getClient().getChannelServer().getMapFactory().getMap(211070100).resetFully(false);
+                                        if (v2 == 0) {
+                                            getPlayer().applyBMCurse1(1);
+                                        }
+                                        if (!DBConfig.isGanglim && !single) {
+                                        	for (MapleCharacter partyMember : getPlayer().getPartyMembers()) {
+                                        		if (partyMember.getMapId() == getPlayer().getMapId()) {
+                                        			partyMember.setMultiMode(true);
+                                        			partyMember.applyBMCurseJinMulti();
+                                        		}
+                                        	}
+                                        }
+                                        updateEventNumber(getPlayer(), QuestExConstants.VonLeon.getQuestID());
+                                        eim.registerParty(target.getParty(), getPlayer().getMap());
+                                    } else {
+                                        self.sayOk("현재 모든맵이 가득차 이용하실 수 없습니다. 다른 채널을 이용해주세요.");
+                                    }
+                                } else {
+                                    self.say("파티원 중#b#e" + overLap + "가#n#k 오늘 이미 입장 하여 더 이상 도전할 수 없습니다.");
+                                }
+                            } else {
+                                self.say(target.getParty().getPartyMemberList().size() + "명 모두 같은맵에 있어야 합니다.");
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (self.askYesNo("도전을 마치고 알현실에서 퇴장하시겠습니까?") == 1) {
+                    //수락시 퇴장 (네 번째 탑루로 가짐)
+                    getPlayer().setRegisterTransferFieldTime(0);
+                    getPlayer().setRegisterTransferField(0);
+                    registerTransferField(211060801);
+
+                    if (getPlayer().getEventInstance() != null) {
+                        getPlayer().getEventInstance().unregisterPlayer(getPlayer());
+                        getPlayer().setEventInstance(null);
+                    }
+                }
+                //거절시 아무것도없다
+            }
+        }
+    }
+
+    int[] bmWeapons = GameConstants.bmWeapons;
+    public boolean checkBMQuestEquip() {
+        MapleInventory inv = getPlayer().getInventory(MapleInventoryType.EQUIPPED);
+        MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
+        List<Integer> blockedList = new ArrayList<>();
+        for (int next = 0; next > -3999; --next) {
+            Item item = inv.getItem((short) next);
+            if (item == null) {
+                continue;
+            }
+            if (!ii.isCash(item.getItemId())) {
+                if (next == -11 || next == -10 || next <= -1600 && next >= -1700 || next == -117 || next == -122 || next == -131) {
+                    if (next == -11) {
+                        boolean find = false;
+                        for (int i = 0; i < bmWeapons.length; ++i) {
+                            int weapon = bmWeapons[i];
+                            if (item.getItemId() == weapon) {
+                                find = true;
+                                break;
+                            }
+                        }
+                        if (!find) {
+                            if (!(item.getItemId() >= 1572000 && item.getItemId() <= 1572010)) {
+                                blockedList.add(item.getItemId());
+                            }
+                        }
+                    }
+                } else {
+                    blockedList.add(item.getItemId());
+                }
+            }
+        }
+        if (!blockedList.isEmpty()) {
+            String v0 = "#r무기#k와 #b보조무기#k만 착용하고 도전해야 한다.\r\n\r\n#r<착용 해제해야 하는 아이템>#k\r\n";
+            for (int i = 0; i < blockedList.size(); ++i) {
+                int bid = blockedList.get(i);
+                v0 += "#i" + bid + "# #z" + bid + "#\r\n";
+            }
+            self.say(v0, ScriptMessageFlag.Self);
+            return false;
+        }
+        return true;
+    }
+
+    public void VanLeon_Before() {
+        EventInstanceManager eim = getEventInstance();
+        if (eim != null) {
+            if (eim.getProperty("summonNPC") == null) {
+                eim.setProperty("summonNPC", "1");
+                Field field = getPlayer().getMap();
+                field.spawnNpc(2161000, new Point(-6, -188));
+                field.broadcastMessage(CField.NPCPacket.npcSpecialAction(field.getNPCById(2161000).getObjectId(), "summon", 0, 0));
+            }
+        }
+    }
+
+    public void VanLeon_Summon() {
+        /*
+8840013 - 이지소환
+8840010 - 노말소환
+8840018 - 하드소환
+         */
+        EventInstanceManager eim = getEventInstance();
+        if (eim != null) {
+            if (target.getParty().getLeader().getId() == target.getId()) { //파티장만 소환가능(중복소환 방지)
+                if (self.askAccept("나를 물리치러 온 용사들인가... 검은 마법사를 적대하는 자들인가... 어느 쪽이건 상관 없겠지. 서로의 목적이 명확하다면 더 이야기 할 필요는 없을 테니...  \r\n덤벼라. 어리석은 자들아...#k", ScriptMessageFlag.NoEsc) == 1) {
+                    //수락하면 반레온이 소환된다
+                    if (eim.getProperty("summonMOB") == null) {
+                        eim.setProperty("summonMOB", "1");
+                        Field field = getPlayer().getMap();
+                        field.removeNpc(2161000);
+                        if (eim.getProperty("mode").equals("hard")) {
+                        	if (DBConfig.isGanglim) {
+                        		field.spawnMonster(MapleLifeFactory.getMonster(8840018), new Point(-6, -188), 32);
+                        	}
+                        	else {
+                        		if (!getPlayer().isMultiMode()) { //싱글모드
+                        			field.spawnMonster(MapleLifeFactory.getMonster(8840018), new Point(-6, -188), 32);
+                        			if (getPlayer().getQuestStatus(2000019) == 1) {
+                        				getPlayer().applyBMCurse1(2);
+                        			}
+                        		}
+                        		else {
+                        			final MapleMonster vonleon = MapleLifeFactory.getMonster(8840018);
+                        			vonleon.setPosition(new Point(-6, -188));
+                        			
+                        			final long hp = vonleon.getMobMaxHp();
+                        			long fixedhp = hp * 3L;
+                        			if (fixedhp < 0) {
+                        				fixedhp = Long.MAX_VALUE;
+                        			}
+                        			vonleon.setHp(fixedhp);
+                        			vonleon.setMaxHp(fixedhp);
+
+        							field.spawnMonster(vonleon, 32);
+                        		}
+                        	}
+                        } else if (eim.getProperty("mode").equals("normal")) {
+                        	if (DBConfig.isGanglim) {
+                        		field.spawnMonster(MapleLifeFactory.getMonster(8840010), new Point(-6, -188), 32);
+                        	}
+                        	else {
+                        		if (getPlayer().getPartyMemberSize() == 1) {
+                        			field.spawnMonster(MapleLifeFactory.getMonster(8840010), new Point(-6, -188), 32);
+                        		}
+                        		else {
+                        			final MapleMonster vonleon = MapleLifeFactory.getMonster(8840010);
+                        			vonleon.setPosition(new Point(-6, -188));
+        							final long hp = vonleon.getMobMaxHp();
+                        			long fixedhp = hp * 3L;
+                        			if (fixedhp < 0) {
+                        				fixedhp = Long.MAX_VALUE;
+                        			}
+                        			vonleon.setHp(fixedhp);
+                        			vonleon.setMaxHp(fixedhp);
+
+        							field.spawnMonster(vonleon, 32);
+                        		}
+                        	}
+                        } else if (eim.getProperty("mode").equals("easy")) {
+                        	if (DBConfig.isGanglim) {
+                        		field.spawnMonster(MapleLifeFactory.getMonster(8840013), new Point(-6, -188), 32);
+                        	}
+                        	else {
+                        		if (getPlayer().getPartyMemberSize() == 1) {
+                        			field.spawnMonster(MapleLifeFactory.getMonster(8840013), new Point(-6, -188), 32);
+                        		}
+                        		else {
+                        			final MapleMonster vonleon = MapleLifeFactory.getMonster(8840013);
+                        			vonleon.setPosition(new Point(-6, -188));
+                        			final long hp = vonleon.getMobMaxHp();
+                        			long fixedhp = hp * 3L;
+                        			if (fixedhp < 0) {
+                        				fixedhp = Long.MAX_VALUE;
+                        			}
+                        			vonleon.setHp(fixedhp);
+                        			vonleon.setMaxHp(fixedhp);
+
+        							field.spawnMonster(vonleon, 32);
+                        		}
+                        	}
+                        }
+                    }
+                }
+            } else {
+                self.say("나를 물리치러 온 용사들인가... 검은 마법사를 적대하는 자들인가... 어느 쪽이건 상관 없겠지. 서로의 목적이 명확하다면 더 이야기 할 필요는 없을 테니...");
+            }
+        }
+        //거절시 아무것도없다
+    }
+
+    public void outVanLeonPrison() {
+        // 감옥열쇠 있어야 탈출가능
+        EventInstanceManager eim = getEventInstance();
+        if (eim != null) {
+            if (getPlayer().haveItem(4032860, 1, false, true)) {
+                registerTransferField(Integer.parseInt(eim.getProperty("map")));
+                getPlayer().removeItem(4032860, -1);
+            } else {
+                getPlayer().dropMessage(5, "열쇠가 없이는 감옥에서 탈출할 수 없습니다. 상자를 뒤져 열쇠를 찾아주세요.");
+            }
+        }
+    }
+}

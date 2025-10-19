@@ -1,0 +1,10 @@
+8644615 = {
+	0 = {
+		ItemID = 2435719
+		Chance = 500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

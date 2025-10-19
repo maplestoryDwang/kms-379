@@ -1,0 +1,140 @@
+BossDamageR = {
+	0 = {
+		Value = 10
+		Weight = 3
+	}
+ 	1 = {
+		Value = 15
+		Weight = 5
+	} 
+	2 = {
+		Value = 20
+		Weight = 10
+	}	
+	Weight = 50
+}
+IgnoreMobPdpR = {
+	0 = {
+		Value = 8
+		Weight = 3
+	}
+	1 = {
+		Value = 10
+		Weight = 5
+	}	
+	2 = {
+		Value = 12
+		Weight = 10
+	}
+	Weight = 70
+}
+CriticalRate = {	
+	0 = {
+		Value = 6
+		Weight = 3
+	}
+	1 = {
+		Value = 7
+		Weight = 5
+	}	
+	2 = {
+		Value = 8
+		Weight = 10
+	}
+	3 = {
+		Value = 9
+		Weight = 10
+	}
+	Weight = 70
+}
+AttackR = {
+	0 = {
+		Value = 6
+		Weight = 3
+	}
+	1 = {
+		Value = 7
+		Weight = 5
+	}	
+	2 = {
+		Value = 8
+		Weight = 10
+	}
+	3 = {
+		Value = 9
+		Weight = 10
+	}
+	Weight = 80
+}
+AllStatR = {
+	0 = {
+		Value = 12
+		Weight = 3
+	}
+	1 = {
+		Value = 13
+		Weight = 5
+	}	
+	2 = {
+		Value = 14
+		Weight = 10
+	}
+	3 = {
+		Value = 15
+		Weight = 10
+	}
+	Weight = 80
+}
+MaxHpR = {
+	0 = {
+		Value = 9
+		Weight = 3
+	}
+	1 = {
+		Value = 10
+		Weight = 5
+	}	
+	2 = {
+		Value = 11
+		Weight = 10
+	}
+	3 = {
+		Value = 12
+		Weight = 10
+	}
+	Weight = 90
+}
+Attack = {
+	0 = {
+		Value = 50
+		Weight = 3
+	}
+	1 = {
+		Value = 60
+		Weight = 5
+	}	
+	2 = {
+		Value = 70
+		Weight = 10
+	}
+	3 = {
+		Value = 80
+		Weight = 10
+	}
+	Weight = 100
+}
+AllStat = {
+	0 = {
+		Value = 80
+		Weight = 3
+	}
+	1 = {
+		Value = 90
+		Weight = 5
+	}	
+	2 = {
+		Value = 100
+		Weight = 10
+	}
+	Weight = 100
+}

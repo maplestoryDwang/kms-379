@@ -1,0 +1,298 @@
+package script.Boss;
+
+import constants.QuestExConstants;
+import database.DBConfig;
+import objects.fields.fieldset.childs.*;
+import scripting.ScriptMessageFlag;
+import scripting.newscripting.ScriptEngineNPC;
+import scripting.NPCScriptManager;
+
+public class Lucid extends ScriptEngineNPC {
+
+    public void lucid_accept() {
+        String Message = "루시드를 막지 못한다면, 무서운 일이 일어날 것입니다.\r\n\r\n";
+        if (DBConfig.isGanglim) {
+        	Message += "#L0#<보스 : 루시드(#b노멀 모드#k)> 입장을 신청한다. #r(레벨 220이상) #g[" + getPlayer().getOneInfoQuestInteger(1234570, "lucid_clear") + "/" + (getPlayer().getBossTier() + 1) + "]#k#l\r\n";
+            Message += "#L1#<보스 : 루시드(#b하드 모드#k)> 입장을 신청한다. #r(레벨 220이상) #g[" + getPlayer().getOneInfoQuestInteger(1234569, "lucid_clear") + "/" + (getPlayer().getBossTier() + 1) + "]#k#l\r\n";
+            Message += "#L2#<보스 : 루시드(#b노멀 연습 모드#k)> 입장을 신청한다. #r(레벨 220이상)#l#k\r\n";
+            Message += "#L3#<보스 : 루시드(#b하드 연습 모드#k)> 입장을 신청한다. #r(레벨 220이상)#l#k\r\n";
+            Message += "#L4#<보스 : 루시드(#r헬 모드#k)> 입장을 신청한다. #r(레벨 270이상)#l#k\r\n";
+            Message += "#L5#이동하지 않는다.#l";
+        }
+        else {
+        	boolean single = getPlayer().getPartyMemberSize() == 1;
+        	Message += "#L0#<보스: 루시드(#b노멀#k)" + (single ? "(싱글)" : "(멀티)") + "> 입장을 신청한다.#l\r\n";
+            Message += "#L1#<보스: 루시드(#b하드#k)" + (single ? "(싱글)" : "(멀티)") + "> 입장을 신청한다.#l\r\n";
+            Message += "#L2#<보스: 루시드(#b노멀#k)" + (single ? "(싱글)" : "(멀티)") + "> 연습 모드 입장을 신청한다.#l\r\n";
+            Message += "#L3#<보스: 루시드(#b하드#k)" + (single ? "(싱글)" : "(멀티)") + "> 연습 모드 입장을 신청한다.#l\r\n";
+            Message += "#L4#<보스: 루시드(#r헬#k)> 입장을 신청한다.#l\r\n";
+            int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.WeeklyQuestResetCount.getQuestID(), "Lucid" + (single ? "Single" : "Multi"));
+            Message += "#L6#입장횟수 증가" + (single ? "(싱글)" : "(멀티)") + " (#r" + (1-reset) +  "회 가능#k) #l\r\n";
+        }
+        int Menu = target.askMenu(Message, ScriptMessageFlag.BigScenario);
+        if (Menu == 5) return; //이동하지 않는다
+        if (Menu == 6 && !DBConfig.isGanglim) {
+        	if (getPlayer().getTogetherPoint() < 150) {
+        		self.sayOk("협동 포인트가 부족합니다. 보유 협동포인트 : " + getPlayer().getTogetherPoint(), ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+        		return;
+        	}
+        	boolean single = getPlayer().getPartyMemberSize() == 1;
+        	int reset = getPlayer().getOneInfoQuestInteger(QuestExConstants.WeeklyQuestResetCount.getQuestID(), "Lucid"+ (single ? "Single" : "Multi"));
+        	if (reset > 0) {
+        		self.sayOk("이번 주에는 이미 입장가능 횟수를 증가시켰습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+        		return;
+        	}
+        	getPlayer().gainTogetherPoint(-150);
+        	getPlayer().updateOneInfo(QuestExConstants.WeeklyQuestResetCount.getQuestID(), "Lucid"+ (single ? "Single" : "Multi"), String.valueOf(reset + 1));
+        	self.sayOk("입장가능 횟수가 증가되었습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+        	return;
+        }
+        if (target.getParty() == null) {
+            self.sayOk("1인 이상 파티를 맺어야만 입장할 수 있습니다.", ScriptMessageFlag.NpcReplacedByNpc);
+            return;
+        }
+        if (target.getParty().getLeader().getId() != target.getId()) {
+            self.sayOk("파티장을 통해 진행해 주십시오.", ScriptMessageFlag.NpcReplacedByNpc);
+            return;
+        }
+        if (!target.getParty().isPartySameMap()) {
+            self.sayOk("파티원이 모두 같은맵에 있어야 합니다.", ScriptMessageFlag.NpcReplacedByNpc);
+            return;
+        }
+        switch (Menu) { //따로 제한되는거 없으면 바로 입장가능함
+            case 0: { //노멀모드
+                NormalLucidEnter fieldSet = (NormalLucidEnter) fieldSet("NormalLucidEnter");
+                int enter = fieldSet.enter(target.getId(), false, 2);
+                if (enter == 6) {
+                    self.sayOk("이용 가능한 인스턴스가 없습니다. 다른 채널을 이용해주세요.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -5) {
+                    self.sayOk("보스 티어가 부족한 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -3) {
+                    if (DBConfig.isGanglim) {
+                        self.sayOk("금일 입장 횟수를 모두 소모한 파티원이 있습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    } else {
+                        self.sayOk("최근 일주일 이내 루시드를 쓰러뜨린 파티원이 있습니다. 루시드는 노멀 모드, 하드 모드를 합쳐 일주일에 1회만 클리어 가능합니다\r\n#r<클리어 기록은 매주 목요일에 일괄 초기화됩니다.>", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    }
+                    return;
+                }
+                if ((enter == -1 || enter == 4)) {
+                    self.sayOk("입장 제한횟수가 부족하거나 레벨 제한이 맞지 않는 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -2) {
+                    self.sayOk("입장 제한시간이 남은 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                break;
+            }
+            case 2: { //노멀 연습 모드
+                int practiceMode = self.askYesNo("연습 모드에 입장을 선택하였습니다. 연습 모드에서는 #b#e경험치와 보상을 얻을 수 없으며#n#k 보스 몬스터의 종류와 상관없이 #b#e하루 20회#n#k만 이용할 수 있습니다. 입장하시겠습니까?");
+                if (practiceMode == 0) {
+                    return;
+                }
+                NormalLucidEnter fieldSet = (NormalLucidEnter) fieldSet("NormalLucidEnter");
+                int enter = fieldSet.enter(target.getId(), true, 2);
+                if (enter == 6) {
+                    self.sayOk("이용 가능한 인스턴스가 없습니다. 다른 채널을 이용해주세요.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -5) {
+                    self.sayOk("보스 티어가 부족한 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == 4) {
+                    self.sayOk("레벨 제한이 맞지 않는 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -1) {
+                    self.sayOk("연습 모드는 하루 20회만 가능합니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                break;
+            }
+            case 1: { //하드모드
+                boolean GenesisQuest = false;
+                if (getPlayer().getQuestStatus(2000025) == 1) {
+                    int Genesis = target.askMenu("#e<제네시스 무기>#n\r\n검은 마법사의 힘이 담긴 #b제네시스 무기#k의 비밀을 풀기 위한 임무를 수행 할 수 있다. 어떻게 할까?\r\n\r\n#e#r<임무 수행 조건>#n#b- 전원 '악몽의 주인 루시드의 흔적'을 진행 중이고 루시드 격파 조건을 완료하지 않은 2인 이하의 파티로 격파\r\n- 도전자의 엘릭서 50개만 사용하여 격파\r\n- 2인 파티 시 최종 데미지 50% 감소, 1명이라도 실패할 경우 모든 파티원 함께 실패, 데스카운트가 남아 있는 파티원이 사망 중인 상태에서는 루시드의 HP 1미만으로 감소 불가#n\r\n#k#L0#미션을 수행한다.#l\r\n#L1#미션을 수행하지 않는다.#l");
+                    if (Genesis == 0) { //미션을 수행한다.
+                        GenesisQuest = true;
+                    } else if (Genesis == 1) { //미션을 수행하지 않는다.
+                        GenesisQuest = false;
+                    }
+                }
+                HardLucidEnter fieldSet = (HardLucidEnter) fieldSet("HardLucidEnter");
+                int enter = fieldSet.enter(target.getId(), false, GenesisQuest, 2);
+                if (enter == 6) {
+                    self.sayOk("이용 가능한 인스턴스가 없습니다. 다른 채널을 이용해주세요.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -5) {
+                    self.sayOk("보스 티어가 부족한 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -10) {
+                    target.sayOk("해당 미션은 두명 이하로 도전 할 수 있습니다.");
+                    return;
+                }
+                if (enter == -20) {
+                    target.sayOk("제네시스 퀘스트를 진행중인 구성으로만 진행할 수 있습니다.");
+                    return;
+                }
+                if (enter == -30) {
+                    target.sayOk("도전자의 엘릭서를 받을 수 있는 공간이 없습니다.");
+                    return;
+                }
+                if (enter == -3) {
+                    if (DBConfig.isGanglim) {
+                        self.sayOk("금일 입장 횟수를 모두 소모한 파티원이 있습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    } else {
+                        self.sayOk("최근 일주일 이내 루시드를 쓰러뜨린 파티원이 있습니다. 데미안은 노멀 모드, 하드 모드를 합쳐 일주일에 1회만 클리어 가능합니다\r\n#r<클리어 기록은 매주 목요일에 일괄 초기화됩니다.>", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    }
+                    return;
+                }
+                if ((enter == -1 || enter == 4)) {
+                    self.sayOk("입장 제한횟수가 부족하거나 레벨 제한이 맞지 않는 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -2) {
+                    self.sayOk("입장 제한시간이 남은 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                break;
+            }
+            case 3: { //하드 연습 모드
+                int practiceMode = self.askYesNo("연습 모드에 입장을 선택하였습니다. 연습 모드에서는 #b#e경험치와 보상을 얻을 수 없으며#n#k 보스 몬스터의 종류와 상관없이 #b#e하루 20회#n#k만 이용할 수 있습니다. 입장하시겠습니까?");
+                if (practiceMode == 0) {
+                    return;
+                }
+                HardLucidEnter fieldSet = (HardLucidEnter) fieldSet("HardLucidEnter");
+                int enter = fieldSet.enter(target.getId(), true, false, 2);
+                if (enter == 6) {
+                    self.sayOk("이용 가능한 인스턴스가 없습니다. 다른 채널을 이용해주세요.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -5) {
+                    self.sayOk("보스 티어가 부족한 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if ((enter == 4)) {
+                    self.sayOk("레벨 제한이 맞지 않는 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -1) {
+                    self.sayOk("연습 모드는 하루 20회만 가능합니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                break;
+            }
+            case 4: { // 헬 모드
+                String hellMenu = ""; 
+                if (DBConfig.isGanglim){
+                    hellMenu = "#fs11##e<루시드 헬 모드>#n\r\n헬 모드는 다음과 같은 조건으로 진행된다.\r\n\r\n#e#r<입장 조건>#n#k\r\n#b -최대 3인 격파\r\n -최종 데미지 99% 감소, 캐릭터 강화 수치 50% 적용\r\n -체력 증가\r\n -강화된 패턴 & 캐릭터 체력 회복효과 50%\r\n -데스 카운트 5회 (파티공유)\r\n#r격파시 55% 확률로 #b#i4031228# #z4031228##r 1개가 인벤토리로 지급된다.\r\n#k#L0#입장한다.#l\r\n#L1#입장하지 않는다.#l";
+                } else {
+                    hellMenu = "#e<루시드 헬 모드>#n\r\n헬 모드는 다음과 같은 조건으로 진행된다.\r\n\r\n#e#r<입장 조건>#n#k\r\n#b -최대 3인 격파\r\n -최종 데미지 95% 감소\r\n -체력 증가\r\n -체력 회복효과 50% 적용\r\n -강화된 패턴\r\n -데스 카운트 5회 (파티공유)\r\n#k#L0#입장한다.#l\r\n#L1#입장하지 않는다.#l";
+                }
+                int WelcomeToTheHell = target.askMenu(hellMenu);
+                if (WelcomeToTheHell == 1) {
+                    return;
+                }
+                if (getPlayer().getPartyMemberSize() >= 4) {
+                	self.sayOk("헬 모드 입장은 최대 3인까지 가능합니다.");
+                	return;
+                }
+                HellLucidEnter fieldSet = (HellLucidEnter) fieldSet("HellLucidEnter");
+                int enter = fieldSet.enter(target.getId(), false, DBConfig.isGanglim ? 8 : 2);
+                if (enter == 6) {
+                    self.sayOk("이용 가능한 인스턴스가 없습니다. 다른 채널을 이용해주세요.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -5) {
+                    self.sayOk("보스 티어가 부족한 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -10) {
+                    target.sayOk("해당 미션은 두명 이하로 도전 할 수 있습니다.");
+                    return;
+                }
+                if (enter == -20) {
+                    target.sayOk("제네시스 퀘스트를 진행중인 구성으로만 진행할 수 있습니다.");
+                    return;
+                }
+                if (enter == -30) {
+                    target.sayOk("도전자의 엘릭서를 받을 수 있는 공간이 없습니다.");
+                    return;
+                }
+                if (enter == -3) {
+                    if (DBConfig.isGanglim) {
+                        self.sayOk("최근 일주일 이내 헬 루시드를 쓰러뜨린 파티원이 있습니다.\r\n헬 루시드는 일주일에 1회만 클리어 가능합니다.\r\n#r<클리어 기록은 매주 월요일에 일괄 초기화됩니다.>", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    } else {
+                        self.sayOk("최근 일주일 이내 루시드를 쓰러뜨린 파티원이 있습니다. 루시드은 노멀 모드, 하드 모드를 합쳐 일주일에 1회만 클리어 가능합니다\r\n#r<클리어 기록은 매주 목요일에 일괄 초기화됩니다.>", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    }
+                    return;
+                }
+                if ((enter == -1 || enter == 4)) {
+                    self.sayOk("입장 제한횟수가 부족하거나 레벨 제한이 맞지 않는 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                if (enter == -2) {
+                    self.sayOk("입장 제한시간이 남은 파티원이 있어 입장할 수 없습니다.", ScriptMessageFlag.Scenario, ScriptMessageFlag.NpcReplacedByNpc);
+                    return;
+                }
+                break;
+            }
+        }
+    }
+    
+    public void midnightChaser_NPC() {
+        if (DBConfig.isGanglim) {
+            getClient().removeClickedNPC();
+            NPCScriptManager.getInstance().start(getClient(), 9010100, "dreamBreaker_NPC", true);
+            return;
+        }
+        lucid_accept();
+        return;
+    }
+
+    public void dreamBreaker_NPC() {
+        if (DBConfig.isGanglim) {
+            return;
+        }
+        lucid_accept();
+        return;
+    }
+
+    public void west_450004150() {
+        if (self.askYesNo("전투를 중지하고 나가시겠습니까?") == 1) {
+            registerTransferField(getPlayer().getMap().getReturnMap().getId());
+            if (getPlayer().getEventInstance() != null) {
+                getPlayer().getEventInstance().unregisterPlayer(getPlayer());
+            }
+            if (getPlayer().getBossMode() == 1) {
+                getPlayer().setBossMode(0);
+            }
+        }
+    }
+
+    public void out_450004250() {
+        if (self.askYesNo("전투를 중지하고 나가시겠습니까?") == 1) {
+            getPlayer().setRegisterTransferFieldTime(0);
+            getPlayer().setRegisterTransferField(0);
+            registerTransferField(getPlayer().getMap().getReturnMap().getId());
+            if (getPlayer().getEventInstance() != null) {
+                getPlayer().getEventInstance().unregisterPlayer(getPlayer());
+                getPlayer().setEventInstance(null);
+            }
+            if (getPlayer().getBossMode() == 1) {
+                getPlayer().setBossMode(0);
+            }
+        }
+    }
+
+    public void out_450004300() {
+        getPlayer().changeMap(450004000, 0);
+    }
+}

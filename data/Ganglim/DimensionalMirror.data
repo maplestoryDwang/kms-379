@@ -1,0 +1,84 @@
+﻿# 로얄 컨텐츠 시스템
+# Type에 숫자를 1씩 증가하여 순서대로 추가해주세요.
+# 해당 숫자에 대응하는 타이틀 이미지 파일이 UI.wz에 추가되어야 합니다.
+
+1 = {
+	Title = 후원 시스템
+	Desc = 후원 시스템
+	MinLevel = 10
+	Type = 1
+	Rewards = {
+	}
+}
+2 = {
+	Title = 홍보 시스템
+	Desc = 홍보 시스템
+	MinLevel = 10
+	Type = 2
+	Rewards = {
+	}
+}
+3 = {
+	Title = 닉네임 변경
+	Desc = 닉네임 변경
+	MinLevel = 10
+	Type = 3
+	Rewards = {
+	}
+}
+4 = {
+	Title = 직업 변경
+	Desc = 직업 변경
+	MinLevel = 10
+	Type = 4
+	Rewards = {
+	}
+}
+5 = {
+	Title = V 매트릭스
+	Desc = V 매트릭스
+	MinLevel = 10
+	Type = 5
+	Rewards = {
+	}
+}
+6 = {
+	Title = 유니온
+	Desc = 유니온
+	MinLevel = 10
+	Type = 6
+	Rewards = {
+	}
+}
+7 = {
+	Title = 전투력 측정
+	Desc = 전투력 측정
+	MinLevel = 10
+	Type = 7
+	Rewards = {
+	}
+}
+8 = {
+	Title = 성장 시스템
+	Desc = 성장 시스템
+	MinLevel = 10
+	Type = 8
+	Rewards = {
+	}
+}
+9 = {
+	Title = 랭킹 시스템
+	Desc = 랭킹 시스템
+	MinLevel = 10
+	Type = 10
+	Rewards = {
+	}
+}
+10 = {
+	Title = 강화 시스템
+	Desc = 강화 시스템
+	MinLevel = 10
+	Type = 11
+	Rewards = {
+	}
+}

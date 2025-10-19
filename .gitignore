@@ -16,7 +16,6 @@
 /target/
 /dist/
 /META-INF/
-/Data/
 /scripts_custom/
 *.log
 *.log.gz
@@ -28,3 +27,4 @@ bin/
 sql/
 api/
 tokens/
+*.bin

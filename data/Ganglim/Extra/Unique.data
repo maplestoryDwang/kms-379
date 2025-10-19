@@ -1,0 +1,200 @@
+ExpRateR = {
+	0 = {
+		Value = 10
+		Weight = 3
+	}
+ 	1 = {
+		Value = 15
+		Weight = 5
+	} 
+	2 = {
+		Value = 20
+		Weight = 10
+	}	
+	Weight = 70
+}
+DropRateR = {
+	0 = {
+		Value = 10
+		Weight = 3
+	}
+ 	1 = {
+		Value = 15
+		Weight = 5
+	} 
+	2 = {
+		Value = 20
+		Weight = 10
+	}	
+	Weight = 70
+}
+MesoRateR = {
+	0 = {
+		Value = 10
+		Weight = 3
+	}
+ 	1 = {
+		Value = 15
+		Weight = 5
+	} 
+	2 = {
+		Value = 20
+		Weight = 10
+	}	
+	Weight = 70
+}
+CriticalDamage = {
+	0 = {
+		Value = 5
+		Weight = 3
+	}
+ 	1 = {
+		Value = 6
+		Weight = 5
+	} 
+	2 = {
+		Value = 7
+		Weight = 10
+	}	
+	3 = {
+		Value = 8
+		Weight = 15
+	}	
+	Weight = 90
+}
+AttackR = {
+	0 = {
+		Value = 9
+		Weight = 3
+	}
+ 	1 = {
+		Value = 10
+		Weight = 5
+	} 
+	2 = {
+		Value = 11
+		Weight = 10
+	}	
+	3 = {
+		Value = 12
+		Weight = 15
+	}	
+	Weight = 90
+}
+BossDamageR = {
+	0 = {
+		Value = 20
+		Weight = 3
+	}
+ 	1 = {
+		Value = 25
+		Weight = 5
+	} 
+	2 = {
+		Value = 30
+		Weight = 10
+	}	
+	Weight = 90
+}
+IgnoreMobPdpR = {
+	0 = {
+		Value = 20
+		Weight = 3
+	}
+ 	1 = {
+		Value = 25
+		Weight = 5
+	} 
+	2 = {
+		Value = 30
+		Weight = 10
+	}	
+	Weight = 90
+}
+CriticalRate = {
+	0 = {
+		Value = 9
+		Weight = 3
+	}
+ 	1 = {
+		Value = 10
+		Weight = 5
+	} 
+	2 = {
+		Value = 11
+		Weight = 10
+	}
+	3 = {
+		Value = 12
+		Weight = 15
+	}	
+	Weight = 90
+}
+AllStatR = {
+	0 = {
+		Value = 15
+		Weight = 3
+	}
+ 	1 = {
+		Value = 17
+		Weight = 5
+	} 
+	2 = {
+		Value = 19
+		Weight = 10
+	}
+	3 = {
+		Value = 21
+		Weight = 15
+	}	
+	Weight = 90
+}
+MaxHpR = {
+	0 = {
+		Value = 12
+		Weight = 3
+	}
+ 	1 = {
+		Value = 13
+		Weight = 5
+	} 
+	2 = {
+		Value = 14
+		Weight = 10
+	}
+	3 = {
+		Value = 15
+		Weight = 15
+	}	
+	Weight = 90
+}
+Attack = {
+	0 = {
+		Value = 80
+		Weight = 3
+	}
+ 	1 = {
+		Value = 90
+		Weight = 5
+	} 
+	2 = {
+		Value = 100
+		Weight = 10
+	}
+	Weight = 100
+}
+AllStat = {
+	0 = {
+		Value = 100
+		Weight = 3
+	}
+ 	1 = {
+		Value = 125
+		Weight = 5
+	} 
+	2 = {
+		Value = 150
+		Weight = 10
+	}
+	Weight = 100
+}

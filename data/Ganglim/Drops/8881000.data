@@ -1,0 +1,106 @@
+8881000 = {
+	0 = {
+		ItemID = 2711003
+		Chance = 10000000
+		QuestID = 0
+		Min = 1
+		Max = 4
+		Individual = 0
+	}
+	1 = {
+		ItemID = 2711004
+		Chance = 10000000
+		QuestID = 0
+		Min = 1
+		Max = 6
+		Individual = 0
+	}
+	2 = {
+		ItemID = 2048716
+		Chance = 300000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	3 = {
+		ItemID = 2434470
+		Chance = 10000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	4 = {
+		ItemID = 2434006
+		Chance = 5000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	5 = {
+		ItemID = 4001209
+		Chance = 10000000
+		QuestID = 0
+		Min = 1
+		Max = 3
+		Individual = 0
+	}
+	6 = {
+		ItemID = 4001210
+		Chance = 28000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	7 = {
+		ItemID = 4038000
+		Chance = 3000
+		QuestID = 0
+		Min = 1
+		Max = 2
+		Individual = 0
+	}
+	8 = {
+		ItemID = 4009346
+		Chance = 10000000
+		QuestID = 0
+		Min = 1
+		Max = 3
+		Individual = 0
+	}
+	9 = {
+		ItemID = 4009347
+		Chance = 10000000
+		QuestID = 0
+		Min = 1
+		Max = 2
+		Individual = 0
+	}
+	10 = {
+		ItemID = 4009348
+		Chance = 10000000
+		QuestID = 0
+		Min = 1
+		Max = 3
+		Individual = 0
+	}
+	11 = {
+		ItemID = 4009349
+		Chance = 10000000
+		QuestID = 0
+		Min = 1
+		Max = 2
+		Individual = 0
+	}
+	12 = {
+		ItemID = 4009350
+		Chance = 4500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

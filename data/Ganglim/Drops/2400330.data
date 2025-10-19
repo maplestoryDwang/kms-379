@@ -1,0 +1,10 @@
+2400330 = {
+	1 = {
+		ItemID = 4033836
+		Chance = 10
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

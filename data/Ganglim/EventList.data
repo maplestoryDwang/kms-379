@@ -1,0 +1,45 @@
+﻿1 = {
+   eventName = [강림월드] 접속보상 이벤트
+   eventDesc = 
+   eventEndHour = 235999
+   eventStartTime = 20250531
+   eventEndTime = 29990101
+   items = {
+      0 = {
+         itemID = 2630442
+      }
+      1 = {
+         itemID = 4001716
+      }
+      2 = {
+         itemID = 5060048
+      }
+      3 = {
+         itemID = 2450064
+      }
+   }
+}
+2 = {
+   eventName = [강림월드] 핫타임 ※ 매일 오후 9시
+   eventDesc = 
+   eventEndHour = 210000
+   eventStartTime = 20250531
+   eventEndTime = 29990101
+   items = {
+      0 = {
+         itemID = 2435885
+      }
+      1 = {
+         itemID = 4031227
+      }
+      2 = {
+         itemID = 4001716
+      }
+      3 = {
+         itemID = 5060048
+      }
+      4 = {
+         itemID = 2450064
+      }
+   }
+}

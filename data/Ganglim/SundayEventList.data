@@ -1,0 +1,2050 @@
+# 선데이이벤트에 실제 적용되는 이벤트리스트입니다
+
+0 = {
+	eventName = 룬 경험치 버프 효과 +100%
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200628
+	eventEndTime = 20200628
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 17
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+1 = {
+	eventName = 콤보킬 구슬 경험치 획득량 +300%
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200628
+	eventEndTime = 20200628
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 37
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+2 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200705
+	eventEndTime = 20200705
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 30
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+3 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200705
+	eventEndTime = 20200705
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 34
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+4 = {
+	eventName = 주문의 흔적 강화 비용 50% 할인
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n주문의 흔적 강화 비용\r\n#fc0xFFFFCC00#50% 할인!#k
+	eventDesc2 = 
+	eventStartTime = 20200712
+	eventEndTime = 20200712
+	eventEndHour = 235900
+	eventFlag0 = 3
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+5 = {
+	eventName = 어빌리티 재설정 비용 50% 할인
+	eventDesc0 = 어빌리티 재설정 비용 50% 할인!
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200712
+	eventEndTime = 20200712
+	eventEndHour = 235900
+	eventFlag0 = 6
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+6 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#스타포스 강화#k 비용 30% 할인#n\r\n(파괴방지 비용과 슈페리얼 장비는 이벤트 대상에서 제외되며, MVP/PC방 할인은 30% 할인된 가격에 추가로 적용됩니다)
+	eventDesc2 = 
+	eventStartTime = 20200719
+	eventEndTime = 20200719
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 4
+	eventVal0 = 0
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 30
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+7 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200628
+	eventEndTime = 20200628
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+8 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200705
+	eventEndTime = 20200705
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+9 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200712
+	eventEndTime = 20200713
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+10 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200719
+	eventEndTime = 20200720
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+11 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200726
+	eventEndTime = 20200727
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+12 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200802
+	eventEndTime = 20200803
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+13 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200809
+	eventEndTime = 20200810
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+14 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200816
+	eventEndTime = 20200817
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+15 = {
+	eventName = 스타포스 10성 이하 1+1 강화
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#10성 이하 스타포스 강화 성공시 1+1 강화!#k#n\r\n(슈페리얼 장비는 이벤트 대상에서 제외됩니다)
+	eventDesc2 = 
+	eventStartTime = 20200802
+	eventEndTime = 20200802
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 40
+	eventVal0 = 1
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 12
+}
+16 = {
+	eventName = 룬 경험치 버프 효과 +100%
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200809
+	eventEndTime = 20200809
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 17
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+17 = {
+	eventName = 콤보킬 구슬 경험치 획득량 +300%
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200809
+	eventEndTime = 20200809
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 37
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+18 = {
+	eventName = 어빌리티 재설정 비용 50% 할인
+	eventDesc0 = 어빌리티 재설정 비용 50% 할인!
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200816
+	eventEndTime = 20200816
+	eventEndHour = 235900
+	eventFlag0 = 6
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+19 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200823
+	eventEndTime = 20200824
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+20 = {
+	eventName = 스타포스 5, 10, 15성 100% 강화 성공
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#스타포스 5성, 10성, 15성#k에서 강화 시도 시 성공 확률 100%!#n\r\n(슈페리얼 장비는 이벤트 대상에서 제외됩니다)
+	eventDesc2 = 
+	eventStartTime = 20200823
+	eventEndTime = 20200823
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 5
+	eventVal0 = 0
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+		0 = {
+			toStarForce = 16
+			fixedProb = 1000
+		}
+		1 = {
+			toStarForce = 6
+			fixedProb = 1000
+		}
+		2 = {
+			toStarForce = 11
+			fixedProb = 1000
+		}
+	}
+	starForceDoubleValue = 0
+}
+21 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200830
+	eventEndTime = 20200831
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+22 = {
+	eventName = 주문의 흔적 강화 비용 50% 할인
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n주문의 흔적 강화 비용\r\n#fc0xFFFFCC00#50% 할인!#k
+	eventDesc2 = 
+	eventStartTime = 20200830
+	eventEndTime = 20200830
+	eventEndHour = 235900
+	eventFlag0 = 3
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+23 = {
+	eventName = 위대한 소울 획득 확률 5배
+	eventDesc0 = 위대한 소울 획득 확률 5배!
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200830
+	eventEndTime = 20200830
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 32
+	eventVal0 = 5
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+24 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200906
+	eventEndTime = 20200906
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 30
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+25 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200906
+	eventEndTime = 20200906
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 34
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+26 = {
+	eventName = 룬 경험치 버프 효과 +100%
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200913
+	eventEndTime = 20200913
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 17
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+27 = {
+	eventName = 콤보킬 구슬 경험치 획득량 +300%
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20200913
+	eventEndTime = 20200913
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 37
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+28 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#스타포스 강화#k 비용 30% 할인#n\r\n(파괴방지 비용과 슈페리얼 장비는 이벤트 대상에서 제외되며, MVP/PC방 할인은 30% 할인된 가격에 추가로 적용됩니다)
+	eventDesc2 = 
+	eventStartTime = 20200920
+	eventEndTime = 20200920
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 4
+	eventVal0 = 0
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 30
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+29 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201004
+	eventEndTime = 20201004
+	eventEndHour = 235900
+	eventFlag0 = 19
+	eventFlag1 = 11
+	eventVal0 = 100
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+30 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201011
+	eventEndTime = 20201011
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 30
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+31 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201011
+	eventEndTime = 20201011
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 34
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+32 = {
+	eventName = 스타포스 10성 이하 1+1 강화
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#10성 이하 스타포스 강화 성공시 1+1 강화!#k#n\r\n(슈페리얼 장비는 이벤트 대상에서 제외됩니다)
+	eventDesc2 = 
+	eventStartTime = 20201018
+	eventEndTime = 20201018
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 40
+	eventVal0 = 1
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 12
+}
+33 = {
+	eventName = 주문의 흔적 강화 비용 50% 할인
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n주문의 흔적 강화 비용\r\n#fc0xFFFFCC00#50% 할인!#k
+	eventDesc2 = 
+	eventStartTime = 20201018
+	eventEndTime = 20201018
+	eventEndHour = 235900
+	eventFlag0 = 3
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+34 = {
+	eventName = 어빌리티 재설정 비용 50% 할인
+	eventDesc0 = 어빌리티 재설정 비용 50% 할인!
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201018
+	eventEndTime = 20201018
+	eventEndHour = 235900
+	eventFlag0 = 6
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+35 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 룬 경험치 버프 효과 +100%
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201025
+	eventEndTime = 20201025
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 17
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+36 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 콤보킬 구슬 경험치 획득량 +300%
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201025
+	eventEndTime = 20201025
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 37
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+37 = {
+	eventName = 스타포스 강화 비용 30% 할인
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#스타포스 강화#k 비용 30% 할인#n\r\n(파괴방지 비용과 슈페리얼 장비는 이벤트 대상에서 제외되며, MVP/PC방 할인은 30% 할인된 가격에 추가로 적용됩니다)
+	eventDesc2 = 
+	eventStartTime = 20201101
+	eventEndTime = 20201101
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 4
+	eventVal0 = 0
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 30
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+38 = {
+	eventName = 위대한 소울 획득 확률 5배
+	eventDesc0 = 위대한 소울 획득 확률 5배!
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201108
+	eventEndTime = 20201108
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 32
+	eventVal0 = 5
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+39 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201115
+	eventEndTime = 20201115
+	eventEndHour = 235900
+	eventFlag0 = 19
+	eventFlag1 = 11
+	eventVal0 = 100
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+40 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201122
+	eventEndTime = 20201122
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 30
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+41 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201122
+	eventEndTime = 20201122
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 34
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+42 = {
+	eventName = 룬 경험치 버프 효과 +100%
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201129
+	eventEndTime = 20201129
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 17
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+43 = {
+	eventName = 콤보킬 구슬 경험치 획득량 +300%
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201129
+	eventEndTime = 20201129
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 37
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+44 = {
+	eventName = 어빌리티 재설정 비용 50% 할인
+	eventDesc0 = 어빌리티 재설정 비용 50% 할인!
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201206
+	eventEndTime = 20201206
+	eventEndHour = 235900
+	eventFlag0 = 6
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+45 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#스타포스 강화#k 비용 30% 할인#n\r\n(파괴방지 비용과 슈페리얼 장비는 이벤트 대상에서 제외되며, MVP/PC방 할인은 30% 할인된 가격에 추가로 적용됩니다)
+	eventDesc2 = 
+	eventStartTime = 20201213
+	eventEndTime = 20201213
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 4
+	eventVal0 = 0
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 30
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+46 = {
+	eventName = 주문의 흔적 강화 비용 50% 할인
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n주문의 흔적 강화 비용\r\n#fc0xFFFFCC00#50% 할인!#k
+	eventDesc2 = 
+	eventStartTime = 20201213
+	eventEndTime = 20201213
+	eventEndHour = 235900
+	eventFlag0 = 3
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+47 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 위대한 소울 획득 확률 5배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201227
+	eventEndTime = 20201227
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 32
+	eventVal0 = 5
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+48 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201220
+	eventEndTime = 20201221
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+49 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201220
+	eventEndTime = 20201220
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 30
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+50 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201220
+	eventEndTime = 20201220
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 34
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+51 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20201227
+	eventEndTime = 20201228
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+52 = {
+	eventName = 스타포스 5, 10, 15성 100% 강화 성공
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#스타포스 5성, 10성, 15성#k에서 강화 시도 시 성공 확률 100%!#n\r\n(슈페리얼 장비는 이벤트 대상에서 제외됩니다)
+	eventDesc2 = 
+	eventStartTime = 20210103
+	eventEndTime = 20210103
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 5
+	eventVal0 = 0
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+		0 = {
+			toStarForce = 16
+			fixedProb = 1000
+		}
+		1 = {
+			toStarForce = 6
+			fixedProb = 1000
+		}
+		2 = {
+			toStarForce = 11
+			fixedProb = 1000
+		}
+	}
+	starForceDoubleValue = 0
+}
+53 = {
+	eventName = 주문의 흔적 강화 비용 50% 할인
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n주문의 흔적 강화 비용\r\n#fc0xFFFFCC00#50% 할인!#k
+	eventDesc2 = 
+	eventStartTime = 20210103
+	eventEndTime = 20210103
+	eventEndHour = 235900
+	eventFlag0 = 3
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+54 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210103
+	eventEndTime = 20210104
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+55 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210110
+	eventEndTime = 20210111
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+56 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210117
+	eventEndTime = 20210118
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+57 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210124
+	eventEndTime = 20210125
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+58 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210110
+	eventEndTime = 20210110
+	eventEndHour = 235900
+	eventFlag0 = 19
+	eventFlag1 = 11
+	eventVal0 = 100
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+59 = {
+	eventName = 어빌리티 재설정 비용 50% 할인
+	eventDesc0 = 어빌리티 재설정 비용 50% 할인!
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210110
+	eventEndTime = 20210110
+	eventEndHour = 235900
+	eventFlag0 = 6
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+60 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 3배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210131
+	eventEndTime = 20210201
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+61 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 3배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210207
+	eventEndTime = 20210208
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+62 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 3배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210214
+	eventEndTime = 20210215
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+63 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 3배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210221
+	eventEndTime = 20210222
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+64 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#스타포스 강화#k 비용 30% 할인#n\r\n(파괴방지 비용과 슈페리얼 장비는 이벤트 대상에서 제외되며, MVP/PC방 할인은 30% 할인된 가격에 추가로 적용됩니다)
+	eventDesc2 = 
+	eventStartTime = 20210131
+	eventEndTime = 20210131
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 4
+	eventVal0 = 0
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 30
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+65 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 룬 경험치 버프 효과 +100%
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210207
+	eventEndTime = 20210207
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 17
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+66 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 콤보킬 구슬 경험치 획득량 +300%
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210207
+	eventEndTime = 20210207
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 37
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+67 = {
+	eventName = 스타포스 10성 이하 1+1 강화
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#10성 이하 스타포스 강화 성공시 1+1 강화!#k#n\r\n(슈페리얼 장비는 이벤트 대상에서 제외됩니다)
+	eventDesc2 = 
+	eventStartTime = 20210221
+	eventEndTime = 20210221
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 40
+	eventVal0 = 1
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 12
+}
+68 = {
+	eventName = 주문의 흔적 강화 비용 50% 할인
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n주문의 흔적 강화 비용\r\n#fc0xFFFFCC00#50% 할인!#k
+	eventDesc2 = 
+	eventStartTime = 20210221
+	eventEndTime = 20210221
+	eventEndHour = 235900
+	eventFlag0 = 3
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+69 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210314
+	eventEndTime = 20210314
+	eventEndHour = 235900
+	eventFlag0 = 19
+	eventFlag1 = 11
+	eventVal0 = 100
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+70 = {
+	eventName = 스타포스 5, 10, 15성 100% 강화 성공
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#스타포스 5성, 10성, 15성#k에서 강화 시도 시 성공 확률 100%!#n\r\n(슈페리얼 장비는 이벤트 대상에서 제외됩니다)
+	eventDesc2 = 
+	eventStartTime = 20210321
+	eventEndTime = 20210321
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 5
+	eventVal0 = 0
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+		0 = {
+			toStarForce = 16
+			fixedProb = 1000
+		}
+		1 = {
+			toStarForce = 6
+			fixedProb = 1000
+		}
+		2 = {
+			toStarForce = 11
+			fixedProb = 1000
+		}
+	}
+	starForceDoubleValue = 0
+}
+71 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 룬 경험치 버프 효과 +100%
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210228
+	eventEndTime = 20210228
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 17
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+72 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 콤보킬 구슬 경험치 획득량 +300%
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210228
+	eventEndTime = 20210228
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 37
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+73 = {
+	eventName = [헤이스트] 엘몹 등장 확률 증가
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210408
+	eventEndTime = 20210421
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 25
+	eventVal0 = 10
+	eventVal1 = 100000
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+74 = {
+	eventName = [헤이스트] 룬 재등장 시간 감소
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210408
+	eventEndTime = 20210421
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 18
+	eventVal0 = 600000
+	eventVal1 = 100000
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+75 = {
+	eventName = [헤이스트] 룬 재사용 시간 감소
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210408
+	eventEndTime = 20210421
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 19
+	eventVal0 = 600000
+	eventVal1 = 100000
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+76 = {
+	eventName = [헤이스트] 룬 경험치 효과 증가
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210408
+	eventEndTime = 20210421
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 17
+	eventVal0 = 200
+	eventVal1 = 100000
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+77 = {
+	eventName = [헤이스트] 돌발미션 일일 횟수 증가
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210408
+	eventEndTime = 20210421
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 13
+	eventVal0 = 6
+	eventVal1 = 100000
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+78 = {
+	eventName = [헤이스트] 폴로와 프리토 확률 시작 감소
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210408
+	eventEndTime = 20210421
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 35
+	eventVal0 = 500
+	eventVal1 = 100000
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+79 = {
+	eventName = [헤이스트] 불꽃늑대 경험치 증가
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210408
+	eventEndTime = 20210421
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 34
+	eventVal0 = 150
+	eventVal1 = 100000
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+80 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210307
+	eventEndTime = 20210307
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 30
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+81 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210307
+	eventEndTime = 20210307
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 34
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+82 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 룬 경험치 버프 효과 +100%
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210328
+	eventEndTime = 20210328
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 17
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+83 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 콤보킬 구슬 경험치 획득량 +300%
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210328
+	eventEndTime = 20210328
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 37
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+84 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210404
+	eventEndTime = 20210404
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 30
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+85 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210404
+	eventEndTime = 20210404
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 34
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+86 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#스타포스 강화#k 비용 30% 할인#n\r\n(파괴방지 비용과 슈페리얼 장비는 이벤트 대상에서 제외되며, MVP/PC방 할인은 30% 할인된 가격에 추가로 적용됩니다)
+	eventDesc2 = 
+	eventStartTime = 20210411
+	eventEndTime = 20210411
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 4
+	eventVal0 = 0
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 30
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+87 = {
+	eventName = 위대한 소울 획득 확률 5배
+	eventDesc0 = 위대한 소울 획득 확률 5배!
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210418
+	eventEndTime = 20210418
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 32
+	eventVal0 = 5
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+88 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 룬 경험치 버프 효과 +100%
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210425
+	eventEndTime = 20210425
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 17
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+89 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 콤보킬 구슬 경험치 획득량 +300%
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210425
+	eventEndTime = 20210425
+	eventEndHour = 235900
+	eventFlag0 = 0
+	eventFlag1 = 37
+	eventVal0 = 300
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+90 = {
+	eventName = 스타포스 10성 이하 1+1 강화
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#10성 이하 스타포스 강화 성공시 1+1 강화!#k#n\r\n(슈페리얼 장비는 이벤트 대상에서 제외됩니다)
+	eventDesc2 = 
+	eventStartTime = 20210425
+	eventEndTime = 20210425
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 40
+	eventVal0 = 1
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 12
+}
+91 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210425
+	eventEndTime = 20210426
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+92 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210502
+	eventEndTime = 20210502
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 30
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+93 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210502
+	eventEndTime = 20210502
+	eventEndHour = 235900
+	eventFlag0 = 20
+	eventFlag1 = 34
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+94 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210502
+	eventEndTime = 20210503
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+95 = {
+	eventName = 어빌리티 재설정 비용 50% 할인
+	eventDesc0 = 어빌리티 재설정 비용 50% 할인!
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210509
+	eventEndTime = 20210509
+	eventEndHour = 235900
+	eventFlag0 = 6
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+96 = {
+	eventName = 주문의 흔적 강화 비용 50% 할인
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n주문의 흔적 강화 비용\r\n#fc0xFFFFCC00#50% 할인!#k
+	eventDesc2 = 
+	eventStartTime = 20210509
+	eventEndTime = 20210509
+	eventEndHour = 235900
+	eventFlag0 = 3
+	eventFlag1 = 4
+	eventVal0 = 50
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+97 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 20210509
+	eventEndTime = 20210510
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}
+98 = {
+	eventName = 스타포스 5, 10, 15성 100% 강화 성공
+	eventDesc0 = 
+	eventDesc1 = #e일요일은 메이플! <썬데이 메이플> 이벤트!\r\n\r\n#fc0xFFFFCC00#스타포스 5성, 10성, 15성#k에서 강화 시도 시 성공 확률 100%!#n\r\n(슈페리얼 장비는 이벤트 대상에서 제외됩니다)
+	eventDesc2 = 
+	eventStartTime = 99999999
+	eventEndTime = 99999999
+	eventEndHour = 235900
+	eventFlag0 = 4
+	eventFlag1 = 5
+	eventVal0 = 0
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+		0 = {
+			toStarForce = 16
+			fixedProb = 1000
+		}
+		1 = {
+			toStarForce = 6
+			fixedProb = 1000
+		}
+		2 = {
+			toStarForce = 11
+			fixedProb = 1000
+		}
+	}
+	starForceDoubleValue = 0
+}
+99 = {
+	eventName = [썬데이 메이플] 일요일 혜택!
+	eventDesc0 = 포인트 1일 획득 2배
+	eventDesc1 = 
+	eventDesc2 = 
+	eventStartTime = 99999999
+	eventEndTime = 99999999
+	eventEndHour = 0
+	eventFlag0 = 0
+	eventFlag1 = 39
+	eventVal0 = 200
+	eventVal1 = 0
+	eventVal2 = 0
+	eventVal3 = 0
+	eventVal4 = 0
+	starForceSaleValue = 0
+	starForce100Success = {
+	}
+	starForceDoubleValue = 0
+}

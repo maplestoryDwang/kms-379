@@ -1,0 +1,10 @@
+8645133 = {
+	0 = {
+		ItemID = 2633336
+		Chance = 150
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

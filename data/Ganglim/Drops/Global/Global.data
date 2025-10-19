@@ -1,0 +1,164 @@
+Global = {
+	0 = {
+		ItemID = 4310237
+		Chance = 12000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	1 = {
+		ItemID = 2632800
+		Chance = 1500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	2 = {
+		ItemID = 4310229
+		Chance = 6000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	3 = {
+		ItemID = 4021031
+		Chance = 3000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	7 = {
+		ItemID = 2431174
+		Chance = 5500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	8 = {
+		ItemID = 4001326
+		Chance = 45
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	9 = {
+		ItemID = 4001327
+		Chance = 45
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	10 = {
+		ItemID = 4001328
+		Chance = 45
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	11 = {
+		ItemID = 4001329
+		Chance = 45
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	12 = {
+		ItemID = 4001330
+		Chance = 45
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	13 = {
+		ItemID = 4001331
+		Chance = 45
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	14 = {
+		ItemID = 4001332
+		Chance = 45
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	15 = {
+		ItemID = 4036491
+		Chance = 600
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	16 = {
+		ItemID = 0
+		Chance = 1000000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	17 = {
+		ItemID = 4310330
+		Chance = 500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	18 = {
+		ItemID = 4310266
+		Chance = 500
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	19 = {
+		ItemID = 4031227
+		Chance = 100
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+	20 = {
+		ItemID = 2431940
+		Chance = 3
+		QuestID = 0
+		Min = 1
+		Max = 1
+		DropType = 0
+		Continent = -1
+	}
+}

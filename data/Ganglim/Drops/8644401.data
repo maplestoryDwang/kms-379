@@ -1,0 +1,18 @@
+8644401 = {
+	0 = {
+		ItemID = 2435719
+		Chance = 1000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	1 = {
+		ItemID = 4036327
+		Chance = 500000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+}

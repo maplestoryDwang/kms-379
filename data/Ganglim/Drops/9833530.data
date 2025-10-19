@@ -1,0 +1,18 @@
+9833530 = {
+	0 = {
+		ItemID = 2430460
+		Chance = 50000
+		QuestID = 0
+		Min = 1
+		Max = 1
+		Individual = 0
+	}
+	1 = {
+		ItemID = 4033825
+		Chance = 30
+		QuestID = 0
+		Min = 0
+		Max = 0
+		Individual = 0
+	}
+}

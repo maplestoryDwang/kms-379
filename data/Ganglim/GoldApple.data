@@ -1,0 +1,160 @@
+0 = {
+	itemID = 5060048
+	weight = 1000
+	maleItemID = 4001715
+	bonusWeight = 0
+	announce = false
+	itemLength = 1
+}
+1 = {
+	itemID = 5060048
+	weight = 450
+	maleItemID = 4001716
+	bonusWeight = 0
+	announce = false
+	itemLength = 1
+}
+2 = {
+	itemID = 5060048
+	weight = 300
+	maleItemID = 2023072
+	bonusWeight = 0
+	announce = false
+	itemLength = 1
+}
+3 = {
+	itemID = 5060048
+	weight = 300
+	maleItemID = 2450163
+	bonusWeight = 0
+	announce = false
+	itemLength = 1
+}
+4 = {
+	itemID = 5060048
+	weight = 300
+	maleItemID = 4310237
+	bonusWeight = 0
+	announce = false
+	itemLength = 10
+}
+5 = {
+	itemID = 5060048
+	weight = 300
+	maleItemID = 4310237
+	bonusWeight = 0
+	announce = false
+	itemLength = 20
+}
+6 = {
+	itemID = 5060048
+	weight = 50
+	maleItemID = 2046076
+	bonusWeight = 0
+	announce = true
+	itemLength = 1
+}
+7 = {
+	itemID = 5060048
+	weight = 50
+	maleItemID = 2046077
+	bonusWeight = 0
+	announce = true
+	itemLength = 1
+}
+8 = {
+	itemID = 5060048
+	weight = 50
+	maleItemID = 2046150
+	bonusWeight = 0
+	announce = true
+	itemLength = 1
+}
+9 = {
+	itemID = 5060048
+	weight = 50
+	maleItemID = 2046251
+	bonusWeight = 0
+	announce = true
+	itemLength = 1
+}
+10 = {
+	itemID = 5060048
+	weight = 100
+	maleItemID = 5062005
+	bonusWeight = 0
+	announce = false
+	itemLength = 1
+}
+11 = {
+	itemID = 5060048
+	weight = 100
+	maleItemID = 5062503
+	bonusWeight = 0
+	announce = false
+	itemLength = 1
+}
+12 = {
+	itemID = 5060048
+	weight = 75
+	maleItemID = 5062005
+	bonusWeight = 0
+	announce = false
+	itemLength = 2
+}
+13 = {
+	itemID = 5060048
+	weight = 75
+	maleItemID = 5062503
+	bonusWeight = 0
+	announce = false
+	itemLength = 2
+}
+14 = {
+	itemID = 5060048
+	weight = 20
+	maleItemID = 2430017
+	bonusWeight = 0
+	announce = true
+	itemLength = 1
+}
+15 = {
+	itemID = 5060048
+	weight = 50
+	maleItemID = 2439932
+	bonusWeight = 0
+	announce = true
+	itemLength = 1
+}
+16 = {
+	itemID = 5060048
+	weight = 30
+	maleItemID = 4031227
+	bonusWeight = 0
+	announce = true
+	itemLength = 100
+}
+17 = {
+	itemID = 5060048
+	weight = 30
+	maleItemID = 4033213
+	bonusWeight = 0
+	announce = true
+	itemLength = 10
+}
+18 = {
+	itemID = 5060048
+	weight = 10
+	maleItemID = 5068306
+	bonusWeight = 0
+	announce = true
+	itemLength = 1
+}
+19 = {
+	itemID = 5060048
+	weight = 30
+	maleItemID = 2438145
+	bonusWeight = 0
+	announce = true
+	itemLength = 1
+}

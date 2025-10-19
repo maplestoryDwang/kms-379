@@ -1,0 +1,26 @@
+# 진:眞 트레이드 내용입니다.
+
+0 = {
+	Path = zeniamirror1
+	Desc = 로얄 메이플 - 이벤트
+}
+1 = {
+	Path = zeniamirror2
+	Desc = 로얄 메이플 - 상점
+}
+2 = {
+	Path = zeniamirror3
+	Desc = 로얄 메이플 - 이동
+}
+3 = {
+	Path = zeniamirror4
+	Desc = 로얄 메이플 - 코디
+}
+4 = {
+	Path = zeniamirror5
+	Desc = 로얄 메이플 - 편의
+}
+5 = {
+	Path = zeniamirror6
+	Desc = 로얄 메이플 - 컨텐츠
+}
