@@ -27,7 +27,7 @@ public class PacketCreator {
    public static final byte[] sendProcEnd(String prn) {
       PacketEncoder mplew = new PacketEncoder();
       mplew.write(SendPacketOpcode.KillProcess.getValue());
-      mplew.writeMapleAsciiString2(prn);
+      mplew.writeMapleUTF8String(prn);
       return mplew.getPacket();
    }
 
@@ -37,7 +37,7 @@ public class PacketCreator {
       mplew.write(name != null);
       if (name != null) {
          mplew.writeInt(id);
-         mplew.writeMapleAsciiString2(name);
+         mplew.writeMapleUTF8String(name);
       }
 
       return mplew.getPacket();
@@ -65,7 +65,7 @@ public class PacketCreator {
       mplew.writeInt(map.size());
       map.forEach((id, name) -> {
          mplew.writeInt(id);
-         mplew.writeMapleAsciiString2(name);
+         mplew.writeMapleUTF8String(name);
       });
       return mplew.getPacket();
    }

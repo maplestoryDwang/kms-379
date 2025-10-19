@@ -103,9 +103,14 @@ public class PacketEncoder {
       this.write(0);
    }
 
-   public final void writeMapleAsciiString2(String s) {
+   public final void writeMapleUTF8String(String s) {
       this.writeShort((short)s.getBytes(StandardCharsets.UTF_8).length);
       this.encodeBuffer(s.getBytes(StandardCharsets.UTF_8));
+   }
+
+   public final void writeMapleGBKString(String s) {
+      this.writeShort((short)s.getBytes(Charset.forName("gbk")).length);
+      this.encodeBuffer(s.getBytes(Charset.forName("gbk")));
    }
 
    public final void encodePos(Point s) {

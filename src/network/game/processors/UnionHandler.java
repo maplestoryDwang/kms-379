@@ -412,7 +412,8 @@ public class UnionHandler {
             c.setScriptEngine(path, engine);
          }
 
-         String encoding = "EUC-KR";
+//         String encoding = "EUC-KR";
+         String encoding = "UTF-8";
 
          try (Stream<String> stream = Files.lines(scriptFile.toPath(), Charset.forName(encoding))) {
             String lines = "load('nashorn:mozilla_compat.js');";

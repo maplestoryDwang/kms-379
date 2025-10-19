@@ -102,7 +102,7 @@ public class ConnectorServerHandler {
             c.setAuth(auth);
             PacketEncoder mplew = new PacketEncoder();
             mplew.write(SendPacketOpcode.GameStartResponse.getValue());
-            mplew.writeMapleAsciiString2(auth);
+            mplew.writeMapleUTF8String(auth);
             c.send(mplew.getPacket());
             break;
          case CharacterListRequest:

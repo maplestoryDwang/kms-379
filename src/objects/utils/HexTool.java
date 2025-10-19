@@ -140,7 +140,8 @@ public class HexTool {
                abyte0[j] = (byte)(abyte0[j] + k);
             }
 
-            return new String(abyte0, "euc-kr");
+//            return new String(abyte0, "euc-kr");
+            return new String(abyte0, "UTF-8");
          }
       } catch (Exception var8) {
          return "";

@@ -620,7 +620,7 @@ public class ConnectorPanel extends JFrame implements ActionListener {
          PacketEncoder mplew = new PacketEncoder();
          mplew.write(5);
          mplew.write(7);
-         mplew.writeMapleAsciiString2(this.jTextField1.getText());
+         mplew.writeMapleUTF8String(this.jTextField1.getText());
          cc.send(mplew.getPacket());
 
          for (String sp : jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().split(",")) {
